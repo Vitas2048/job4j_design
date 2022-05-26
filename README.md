@@ -1,1 +1,1 @@
-<h1 align="center">Job4j_design Calendar</h1>
+<h1 align="center">Job4j_design</h1>
