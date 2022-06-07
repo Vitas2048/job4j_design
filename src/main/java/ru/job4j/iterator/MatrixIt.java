@@ -22,8 +22,8 @@ public class MatrixIt implements Iterator<Integer> {
         if (data.length > row && data[row].length != 0) {
             rsl = true;
         } else {
-            if (row + 1 < data.length ) {
-                if ( data[row + 1].length > column) {
+            if (row + 1 < data.length) {
+                if (data[row + 1].length > column) {
                     rsl = true;
                 } else {
                     column = 0;
