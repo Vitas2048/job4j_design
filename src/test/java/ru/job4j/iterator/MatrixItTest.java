@@ -53,7 +53,6 @@ public class MatrixItTest {
         assertThat(it.hasNext(), is(true));
     }
 
-
     @Test
     public void when4El() {
         int[][] in = {
@@ -94,9 +93,9 @@ public class MatrixItTest {
     }
 
     @Test
-    public void whenFewFewEmpty() {
+    public void whenOneByOneEmpty() {
         int[][] in = {
-                {1}, {}, {}, {2}, {}, {2}
+                {1}, {}, {2}, {}, {2}
         };
         MatrixIt it = new MatrixIt(in);
         assertThat(it.next(), is(1));

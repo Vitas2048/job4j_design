@@ -15,11 +15,24 @@ public class MatrixIt implements Iterator<Integer> {
     @Override
     public boolean hasNext() {
         boolean rsl = false;
-        if (data.length > 0) {
-            if (data[column].length > 0 || row + 1 < data.length) {
-                if (row < data.length && column < data[column].length
-                        || data[column + 1].length != 0) {
+        if (column >= data[row].length) {
+            row++;
+            column = 0;
+        }
+        if (data.length > row && data[row].length != 0) {
+            rsl = true;
+        } else {
+            if (row + 1 < data.length ) {
+                if ( data[row + 1].length > column) {
                     rsl = true;
+                } else {
+                    column = 0;
+                    while (data[row].length == 0 && data.length > row + 1) {
+                        row++;
+                    }
+                    if (data[row].length != 0) {
+                        rsl = true;
+                    }
                 }
             }
         }
@@ -30,23 +43,11 @@ public class MatrixIt implements Iterator<Integer> {
     public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
-        }
-        if (column == 0 && row == 0 && data[column].length > 1) {
-            return data[row][column++];
-        } else {
-            while (data[row].length == 0) {
-                row++;
-            }
-            if (column == 0 && row == 0 && row + 1 < data.length) {
-                return data[row++][column];
+        } else if (column + 1 >= data[row].length) {
+            return data[row++][column];
             } else {
-                if (column == data[column].length - 1 && row + 1 < data.length) {
-                    return data[row++][column];
-                } else {
                     return data[row][column++];
-                }
+                    }
 
-            }
-        }
     }
 }
