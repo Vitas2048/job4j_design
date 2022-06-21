@@ -25,11 +25,6 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public T findById(String id) {
-        try {
-            storage.get(id);
-        } catch (NullPointerException e) {
-            System.out.println("NullPointerException");
-        }
         return storage.get(id);
     }
 }
