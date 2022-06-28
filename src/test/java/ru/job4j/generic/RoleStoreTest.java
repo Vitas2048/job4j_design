@@ -84,7 +84,9 @@ public class RoleStoreTest {
         RoleStore store = new RoleStore();
         store.add(new Role("1", "CodeReviewer"));
         store.add(new Role("2", "Tester"));
-        store.add(new Role("3", "Mentor"));
+        store.add(new Role("3", "Mentor"
+
+        ));
         store.replace("2", new Role("2", "Admin"));
         Role result = store.findById("2");
         assertThat(result.getRole(), is("Admin"));
