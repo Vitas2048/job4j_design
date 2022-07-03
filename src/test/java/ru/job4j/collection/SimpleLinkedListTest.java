@@ -93,7 +93,7 @@ public class SimpleLinkedListTest {
         list.add(2);
         Iterator<Integer> it = list.iterator();
         assertThat(it.next(), Is.is(1));
-        list.add(2);
+        list.add(3);
         assertThat(it.next(), Is.is(2));
     }
 }
