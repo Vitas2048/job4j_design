@@ -42,13 +42,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
             this.next = next;
         }
 
-        public Node<E> getPrevEl() {
-            return prev;
-        }
-
-        public void setPrevEl(Node<E> prev) {
-            this.prev = prev;
-        }
     }
     @Override
     public void add(E value) {
