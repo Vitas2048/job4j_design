@@ -15,7 +15,9 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     private void expand() {
-        if (container.length - size == 0) container = Arrays.copyOf(container, container.length * 2);
+        if (container.length - size == 0) {
+            container = Arrays.copyOf(container, container.length * 2);
+        }
     }
 
     @Override
@@ -36,7 +38,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, container.length - 1);
+        Objects.checkIndex(index,container.length - 1);
         T tmp = container[index];
         System.arraycopy(container,index + 1, container, index, container.length - index - 1);
         size--;

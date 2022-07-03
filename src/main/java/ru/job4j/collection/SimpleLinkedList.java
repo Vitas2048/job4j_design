@@ -10,7 +10,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private int size = 0;
     private int modCount;
 
-    public SimpleLinkedList(){
+    public SimpleLinkedList() {
         lastNode = new Node<E>(firstNode, null, null);
         firstNode = new Node<E>(null, null, lastNode);
     }
