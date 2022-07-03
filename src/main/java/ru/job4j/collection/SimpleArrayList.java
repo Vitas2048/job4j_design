@@ -15,36 +15,32 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     private void expand() {
-        if (container.length - size == 0 && size != 0) {
+        if (size == 0) {
+            container = Arrays.copyOf(container, 2);
+        } else if (container.length - size == 0) {
             container = Arrays.copyOf(container, container.length * 2);
-        } else {
-            if (size == 0) {
-                container = Arrays.copyOf(container, 2);
-            }
         }
     }
 
     @Override
     public void add(T value) {
         expand();
-        container[size] = value;
-        size++;
+        container[size++] = value;
         modCount++;
     }
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, size);
-        T tmp = container[index];
+        T tmp = get(index);
         container[index] = newValue;
         return tmp;
     }
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, size);
-        T tmp = container[index];
+        T tmp = get(index);
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
+        container[container.length - 1] = null;
         size--;
         modCount++;
         return tmp;
@@ -73,7 +69,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return size - it > 0;
+                return it < size;
                 }
 
             @Override
