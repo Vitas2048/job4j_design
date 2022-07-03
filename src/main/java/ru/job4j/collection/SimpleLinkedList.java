@@ -74,7 +74,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         return new Iterator<E>() {
 
             int expectedModCount = modCount;
-            int it = 0;
+            int it;
 
             @Override
             public boolean hasNext() {
