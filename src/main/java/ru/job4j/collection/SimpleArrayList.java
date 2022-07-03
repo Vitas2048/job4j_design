@@ -38,9 +38,9 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index,container.length - 1);
+        Objects.checkIndex(index, container.length - 1);
         T tmp = container[index];
-        System.arraycopy(container,index + 1, container, index, container.length - index - 1);
+        System.arraycopy(container, index + 1, container, index, container.length - index - 1);
         size--;
         modCount++;
         return tmp;
