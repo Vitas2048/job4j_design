@@ -3,6 +3,7 @@ package ru.job4j.collection;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleLinkedList<E> implements LinkedList<E> {
     private Node<E> firstNode;
@@ -55,18 +56,12 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
 
     @Override
     public E get(int index) {
-        if (index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        Objects.checkIndex(index, size);
         Node<E> rsl = firstNode.getNextEl();
         for (int i = 0; i < index; i++) {
-            rsl = getNextEl(rsl);
+            rsl = rsl.getNextEl();
         }
         return rsl.getCurrentEl();
-    }
-
-    private Node<E> getNextEl(Node<E> node) {
-        return node.getNextEl();
     }
 
     @Override
@@ -74,14 +69,15 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         return new Iterator<E>() {
 
             int expectedModCount = modCount;
-            int it;
+            Node<E> it = new Node<>(null, null, firstNode);
 
             @Override
             public boolean hasNext() {
                 if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
-                return it < size;
+                return it.next != null && firstNode.next.item != null
+                        && it.next.next.getCurrentEl() != null;
             }
 
             @Override
@@ -89,7 +85,8 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return get(it++);
+                it = it.next;
+                return it.next.item;
             }
         };
     }
