@@ -3,12 +3,16 @@ package ru.job4j.collection;
 import org.w3c.dom.Node;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class SimpleStack<T> {
 
     private ForwardLinked<T> linked = new ForwardLinked<T>();
 
     public T pop() {
+        if (linked.isEmpty()) {
+            throw new NoSuchElementException();
+        }
         return linked.deleteFirst();
     }
 
