@@ -10,9 +10,6 @@ public class SimpleStack<T> {
     private ForwardLinked<T> linked = new ForwardLinked<T>();
 
     public T pop() {
-        if (linked.isEmpty()) {
-            throw new NoSuchElementException();
-        }
         return linked.deleteFirst();
     }
 
