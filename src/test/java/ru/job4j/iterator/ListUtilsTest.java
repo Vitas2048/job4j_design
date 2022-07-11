@@ -45,14 +45,14 @@ public class ListUtilsTest {
     @Test
     public void whenRemoveIf() {
         List<Integer> input = new ArrayList<>(Arrays.asList(0, 1, 2));
-        ListUtils.removeIf(input,  s-> s > 1);
+        ListUtils.removeIf(input,  s -> s > 1);
         assertThat(input, is(Arrays.asList(0, 1)));
     }
 
     @Test
     public void whenRplaceIF() {
         List<Integer> input = new ArrayList<>(Arrays.asList(0, 1, 2));
-        ListUtils.replaceIf(input,  s-> s > 0, 2);
+        ListUtils.replaceIf(input,  s -> s > 0, 2);
         assertThat(input, is(Arrays.asList(0, 2, 2)));
     }
 
