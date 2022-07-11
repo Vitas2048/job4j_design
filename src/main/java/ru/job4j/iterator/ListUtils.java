@@ -20,7 +20,7 @@ public class ListUtils {
     public static <T> void addAfter(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
         ListIterator<T> iterator = list.listIterator();
-        while (iterator != null) {
+        while (null != iterator) {
             if (iterator.previousIndex() == index) {
                 iterator.add(value);
                 break;
