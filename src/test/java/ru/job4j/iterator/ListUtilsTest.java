@@ -63,5 +63,4 @@ public class ListUtilsTest {
         ListUtils.removeAll(input, elements);
         assertThat(input, is(Arrays.asList(3, 4)));
     }
-
 }
