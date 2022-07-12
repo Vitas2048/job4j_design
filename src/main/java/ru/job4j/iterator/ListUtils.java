@@ -20,7 +20,7 @@ public class ListUtils {
     }
 
     public static boolean eq(ListIterator e, ListIterator f) {
-        return check(s-> s.next().equals(e.next()), f);
+        return check(s -> s.next().equals(e.next()), f);
     }
 
     public static <T> void addBefore(List<T> list, int index, T value) {
