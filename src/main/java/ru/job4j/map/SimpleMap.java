@@ -42,8 +42,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int hash(int hashCode) {
-        int h;
-        return (hashCode == 0) ? 0 : (h = hashCode) ^ (h >>> capacity);
+        return (hashCode == 0) ? 0 : hashCode ^ (hashCode >>> capacity);
     }
 
     private int indexFor(int hash) {
@@ -81,7 +80,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
             int keyHash = Objects.equals(key, null) ? 0 : key.hashCode();
             int tableHash = Objects.equals(key, null) ? 0 : table[index].key.hashCode();
             if (tableHash == keyHash) {
-                if (Objects.equals(table[index].key,key)) {
+                if (Objects.equals(table[index].key, key)) {
                     table[index] = null;
                 }
             }
@@ -107,10 +106,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (j < table.length && table[j] != null) {
                     return true;
                 } else {
-                    while (j + 1 < table.length && table[j] == null ) {
+                    while (j + 1 < table.length && table[j] == null) {
                         j++;
                     }
-                    return j + 1 <= table.length && table[j] != null ;
+                    return j + 1 <= table.length && table[j] != null;
                 }
             }
 
