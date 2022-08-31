@@ -7,7 +7,8 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class SimpleMapTest {
 
@@ -124,5 +125,38 @@ class SimpleMapTest {
         map.put(null, "0000");
         assertThat(map.remove(null)).isTrue();
         assertThat(map).hasSize(4);
+    }
+
+    @Test
+    void whenCheckRemoveKey() {
+        map.put(null, "0000");
+        map.put(5, "5");
+        map.remove(5);
+        assertThat(map).hasSize(5);
+    }
+
+    @Test
+    void whenCheckRemoveFalse() {
+        map.put(null, "0000");
+        map.put(5, "5");
+        map.remove(5);
+        assertThat(map.remove(5)).isFalse();
+    }
+
+    @Test
+    void whenSimpleGet() {
+        map.put(null, "0000");
+        map.put(5, "5");
+        map.get(5);
+        assertThat(map.get(5)).isEqualTo("5");
+    }
+
+    @Test
+    void whenDoublePutAndGet() {
+        map.put(null, "0000");
+        map.put(5, "5");
+        assertThat(map.put(5, "25")).isFalse();
+        map.get(5);
+        assertThat(map.get(5)).isEqualTo("5");
     }
 }
