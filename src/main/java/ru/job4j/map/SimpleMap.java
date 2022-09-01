@@ -42,7 +42,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int hash(int hashCode) {
-        return (hashCode == 0) ? 0 : hashCode ^ (hashCode >>> capacity);
+        int h;
+        return (hashCode == 0) ? 0 : (h = hashCode) ^ (h >> capacity);
     }
 
     private int indexFor(int hash) {
@@ -67,12 +68,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        if (Objects.equals(key, null)) {
-            return table[indexFor(0)].value;
+        if (Objects.equals(key, null) || Objects.equals(key, 0)) {
+            return Objects.equals(table[indexFor(0)].key, key) ? table[indexFor(0)].value : null;
         }
         return table[indexFor(hash(key.hashCode()))] == null ? null : table[indexFor(hash(key.hashCode()))].value;
     }
-
     @Override
     public boolean remove(K key) {
         int index = Objects.equals(key, null) ? 0 : indexFor(hash(key.hashCode()));
@@ -80,7 +80,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
             int keyHash = Objects.equals(key, null) ? 0 : key.hashCode();
             int tableHash = Objects.equals(key, null) ? 0 : table[index].key.hashCode();
             if (tableHash == keyHash) {
-                if (Objects.equals(table[index].key, key)) {
+                if (Objects.equals(table[index].key,key)) {
                     table[index] = null;
                 }
             }
@@ -106,10 +106,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (j < table.length && table[j] != null) {
                     return true;
                 } else {
-                    while (j + 1 < table.length && table[j] == null) {
+                    while (j + 1 < table.length && table[j] == null ) {
                         j++;
                     }
-                    return j + 1 <= table.length && table[j] != null;
+                    return j + 1 <= table.length && table[j] != null ;
                 }
             }
 
@@ -133,5 +133,15 @@ public class SimpleMap<K, V> implements Map<K, V> {
             this.value = value;
         }
 
+    }
+
+    public static void main(String[] args) {
+        SimpleMap<Integer, String> map = new SimpleMap<>();
+        map.put(1, "1");
+        map.put(2, "2");
+        map.put(3, "3");
+        map.put(4, "4");
+        map.put(null, "0000");
+        System.out.println(map.get(0));
     }
 }
