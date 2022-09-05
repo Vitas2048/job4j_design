@@ -20,7 +20,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean put(K key, V value) {
         int hash;
-        int h = Objects.hashCode(key) ;
+        int h = Objects.hashCode(key);
         hash = hash(h);
         int i = indexFor(hash);
         if (Objects.equals(table[i], null)) {
@@ -62,9 +62,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        return Objects.equals(key, null) || Objects.equals(key, 0) ?
-               Objects.equals(table[indexFor(0)].key, key) ? table[indexFor(0)].value : null :
-               table[indexFor(hash(key.hashCode()))] == null ? null : table[indexFor(hash(key.hashCode()))].value;
+        return Objects.equals(key, null) || Objects.equals(key, 0)
+                ? Objects.equals(table[indexFor(0)].key, key) ? table[indexFor(0)].value : null
+                : table[indexFor(hash(key.hashCode()))] == null ? null : table[indexFor(hash(key.hashCode()))].value;
     }
     @Override
     public boolean remove(K key) {
