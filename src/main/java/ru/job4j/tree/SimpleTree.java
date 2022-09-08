@@ -1,28 +1,15 @@
 package ru.job4j.tree;
 
-import java.util.*;
-import java.util.Optional;
 import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Queue;
 
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
 
     public SimpleTree(final E root) {
         this.root = new Node<>(root);
-    }
-
-    @Override
-    public boolean add(E parent, E child) {
-        boolean rsl = false;
-        Node<E> aChild = new Node<>(child);
-        Node<E> find = findBy(parent).orElse(null);
-        Node<E> notFind = findBy(child).orElse(null);
-        if (!Objects.equals(find, null) && !find.children.contains(aChild)
-        && Objects.equals(notFind, null)) {
-            find.children.add(new Node<>(child));
-            rsl = true;
-        }
-        return rsl;
     }
 
     @Override
@@ -37,6 +24,19 @@ public class SimpleTree<E> implements Tree<E> {
                 break;
             }
             data.addAll(el.children);
+        }
+        return rsl;
+    }
+
+    @Override
+    public boolean add(E parent, E child) {
+        boolean rsl = false;
+        Node<E> aChild = new Node<>(child);
+        Node<E> find = findBy(parent).orElse(null);
+        if (!Objects.equals(find, null) && !find.children.contains(aChild)
+        && findBy(child).isEmpty()) {
+            find.children.add(new Node<>(child));
+            rsl = true;
         }
         return rsl;
     }
