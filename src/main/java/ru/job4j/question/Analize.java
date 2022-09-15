@@ -19,7 +19,8 @@ public class Analize {
         }
         Set<Integer> prevKeys = prev.keySet();
         Set<Integer> currKeys = curr.keySet();
-        info.setChanged((int) currKeys.stream().filter(s -> !Objects.equals(prev.get(s), curr.get(s))
+        info.setChanged((int) currKeys.stream().
+                filter(s -> !Objects.equals(prev.get(s), curr.get(s))
                 && prev.get(s) != null && curr.get(s) != null).count());
         info.setAdded((int) currKeys.stream().filter(s -> !prevKeys.contains(s)).count());
         info.setDeleted((int) prevKeys.stream().filter(s -> !currKeys.contains(s)).count());
