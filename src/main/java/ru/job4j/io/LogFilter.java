@@ -19,7 +19,7 @@ public class LogFilter {
         return lines;
     }
 
-    public static void save(List<String> log, String file){
+    public static void save(List<String> log, String file) {
         try (PrintWriter out = new PrintWriter(
                 new BufferedOutputStream(
                         new FileOutputStream(file)
