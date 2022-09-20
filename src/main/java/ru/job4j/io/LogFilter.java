@@ -25,6 +25,5 @@ public class LogFilter {
         LogFilter logFilter = new LogFilter();
         List<String> log = logFilter.filter("log.txt");
         log.forEach(System.out::println);
-
     }
 }
