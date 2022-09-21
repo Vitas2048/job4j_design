@@ -12,11 +12,11 @@ class ConfigTest {
         String path = "./data/test.txt";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("name")).isEqualTo("Vitaly");
+        assertThat(config.value("name1")).isEqualTo("Vitaly");
     }
 
     @Test
-     void whenPairWitComment() throws UnsupportedOperationException {
+    void whenPairWitComment() throws UnsupportedOperationException {
 
         String path = "./data/test.txt";
         Config config = new Config(path);

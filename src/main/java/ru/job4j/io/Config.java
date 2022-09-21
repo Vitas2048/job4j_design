@@ -18,6 +18,9 @@ public class Config {
         List<String> list = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             list = in.lines().filter(p -> !p.contains("#")).toList();
+            if (list.stream().anyMatch(p->!p.contains("="))) {
+                throw new IOException();
+            }
             list.forEach(p -> values.put(p.split("=")[0], p.split("=")[1]));
         } catch (IOException e) {
             e.printStackTrace();
