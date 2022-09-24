@@ -49,7 +49,7 @@ class ConfigTest {
                 IllegalArgumentException.class,
                 config::load
         );
-        assertTrue(thrown.getMessage().contains("Не соответствие шаблону - нет ключа"));
+        assertTrue(thrown.getMessage().contains("Не соответствие шаблону - key=value"));
     }
 
     @Test
@@ -60,7 +60,7 @@ class ConfigTest {
                 IllegalArgumentException.class,
                 config::load
         );
-        assertTrue(thrown.getMessage().contains("Не соответствие шаблону - нет значения"));
+        assertTrue(thrown.getMessage().contains("Не соответствие шаблону - key=value"));
     }
 
 }

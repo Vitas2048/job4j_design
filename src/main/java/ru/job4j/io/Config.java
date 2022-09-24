@@ -18,14 +18,9 @@ public class Config {
         List<String> list;
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             list = in.lines().filter(p -> !p.startsWith("#") && !p.isEmpty()).toList();
-            if (list.stream().anyMatch(p -> !p.contains("="))) {
+            if (list.stream().anyMatch(p -> !p.contains("=")
+                    || p.split("=")[0].isEmpty() || p.split("=").length == 1 )) {
                 throw new IllegalArgumentException("Не соответствие шаблону - key=value");
-            }
-            if (list.stream().anyMatch(p -> p.split("=")[0].isEmpty())) {
-                throw new IllegalArgumentException("Не соответствие шаблону - нет ключа");
-            }
-            if (list.stream().anyMatch(p -> p.split("=").length == 1)) {
-                throw new IllegalArgumentException("Не соответствие шаблону - нет значения");
             }
             list.forEach(p -> values.put(p.split("=")[0], p.split("=")[1]));
         } catch (IOException e) {
