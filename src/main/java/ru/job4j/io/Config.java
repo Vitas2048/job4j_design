@@ -19,7 +19,7 @@ public class Config {
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             list = in.lines().filter(p -> !p.startsWith("#") && !p.isEmpty()).toList();
             if (list.stream().anyMatch(p -> !p.contains("=")
-                    || p.split("=")[0].isEmpty() || p.split("=").length == 1 )) {
+                    || p.split("=")[0].isEmpty() || p.split("=").length == 1)) {
                 throw new IllegalArgumentException("Не соответствие шаблону - key=value");
             }
             list.forEach(p -> values.put(p.split("=")[0], p.split("=")[1]));
