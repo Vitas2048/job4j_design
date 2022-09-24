@@ -30,4 +30,37 @@ class ConfigTest {
         assertThat(config.value("name1")).isEqualTo("Vitaly");
         assertThat(config.value("name2")).isEqualTo("Alex");
     }
+
+    @Test
+    void whenWrongPattern() {
+        String path = "./data/test1.txt";
+        Config config = new Config(path);
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                config::load
+        );
+        assertTrue(thrown.getMessage().contains("Не соответствие шаблону - key=value"));
+    }
+    @Test
+    void whenNoKey() throws IllegalArgumentException {
+        String path = "./data/test2.txt";
+        Config config = new Config(path);
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                config::load
+        );
+        assertTrue(thrown.getMessage().contains("Не соответствие шаблону - нет ключа"));
+    }
+
+    @Test
+    void whenNoValue() throws IllegalArgumentException {
+        String path = "./data/test3.txt";
+        Config config = new Config(path);
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                config::load
+        );
+        assertTrue(thrown.getMessage().contains("Не соответствие шаблону - нет значения"));
+    }
+
 }
