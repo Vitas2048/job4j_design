@@ -8,15 +8,18 @@ public class Analizy {
     public void unavailable(String source, String target) {
         List<String> list = new ArrayList<>();
         boolean status = true;
+        String l = "";
         try (BufferedReader in = new BufferedReader(new FileReader(source))) {
-            while (in.ready()) {
-                if (status && (in.readLine().contains("500") || in.readLine().contains("400"))) {
+            for (String s = in.readLine(); s != null; s = in.readLine()) {
+                String spl = s.split(" ")[1];
+                if (status && (s.contains("500") || s.contains("400"))) {
                     status = false;
-                    list.add(in.readLine());
+                    l = spl.concat(";");
                 }
-                if (!status && (in.readLine().contains("300") || in.readLine().contains("200"))) {
+                if (!status && (s.contains("300") || s.contains("200"))) {
                     status = true;
-                    list.add(in.readLine());
+                    l = l.concat(spl).concat(";");
+                    list.add(l);
                 }
             }
         } catch (IOException e) {
@@ -26,7 +29,7 @@ public class Analizy {
                 new BufferedOutputStream(
                         new FileOutputStream(target)
                 ))) {
-                list.forEach(s -> out.println(s.split(" ")[1] + ";"));
+                list.forEach(out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
