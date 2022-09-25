@@ -9,7 +9,8 @@ public class Analizy {
     public void unavailable(String source, String target) {
         List<String> list = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(source))) {
-            list = in.lines().collect(Collectors.toList());
+            list = in.lines().dropWhile(p -> p.contains("400") || p.contains("500")).
+                    dropWhile(p -> p.contains("200") || p.contains("300")).collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -17,16 +18,7 @@ public class Analizy {
                 new BufferedOutputStream(
                         new FileOutputStream(target)
                 ))) {
-            for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).contains("400") || list.get(j).contains("500")) {
-                    for (int k = j + 1; k < list.size(); k++) {
-                        if (list.get(k).contains("200") || list.get(k).contains("300")) {
-                            out.println(list.get(j).split(" ")[1] + ";" + list.get(k).split(" ")[1] + ";");
-                            j = k + 1;
-                        }
-                    }
-                }
-            }
+                list.forEach(out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -17,12 +17,14 @@ public class Config {
     public void load() {
         List<String> list;
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
-            list = in.lines().filter(p -> !p.startsWith("#") && !p.isEmpty()).toList();
-            if (list.stream().anyMatch(p -> !p.contains("=")
-                    || p.split("=")[0].isEmpty() || p.split("=").length == 1)) {
-                throw new IllegalArgumentException("Не соответствие шаблону - key=value");
-            }
-            list.forEach(p -> values.put(p.split("=")[0], p.split("=")[1]));
+            in.lines().filter(p -> !p.startsWith("#") && !p.isEmpty()).forEach(s -> {
+                if (!s.contains("=")
+                        || s.split("=")[0].isEmpty() || s.split("=").length == 1) {
+                        throw new IllegalArgumentException("Не соответствие шаблону - key=value");
+                } else {
+                    values.put(s.split("=")[0], s.split("=")[1]);
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
