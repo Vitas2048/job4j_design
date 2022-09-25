@@ -3,14 +3,21 @@ package ru.job4j.io;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Analizy {
     public void unavailable(String source, String target) {
         List<String> list = new ArrayList<>();
+        boolean status = true;
         try (BufferedReader in = new BufferedReader(new FileReader(source))) {
-            list = in.lines().dropWhile(p -> p.contains("400") || p.contains("500")).
-                    dropWhile(p -> p.contains("200") || p.contains("300")).collect(Collectors.toList());
+            if (status && (in.readLine().contains("500") || in.readLine().contains("400"))) {
+                status = false;
+                list.add(in.readLine());
+            }
+            if (!status && (in.readLine().contains("300") || in.readLine().contains("200"))) {
+                status = true;
+                list.add(in.readLine());
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -18,7 +25,7 @@ public class Analizy {
                 new BufferedOutputStream(
                         new FileOutputStream(target)
                 ))) {
-                list.forEach(out::println);
+                list.forEach(s -> out.println(s.split(" ")[1] + ";"));
         } catch (Exception e) {
             e.printStackTrace();
         }

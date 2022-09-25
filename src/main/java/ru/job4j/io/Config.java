@@ -18,11 +18,12 @@ public class Config {
         List<String> list;
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             in.lines().filter(p -> !p.startsWith("#") && !p.isEmpty()).forEach(s -> {
+                String[] a = s.split("=");
                 if (!s.contains("=")
-                        || s.split("=")[0].isEmpty() || s.split("=").length == 1) {
+                        || a[0].isEmpty() || a.length == 1) {
                         throw new IllegalArgumentException("Не соответствие шаблону - key=value");
                 } else {
-                    values.put(s.split("=")[0], s.split("=")[1]);
+                    values.put(a[0], a[1]);
                 }
             });
         } catch (IOException e) {
