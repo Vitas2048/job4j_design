@@ -9,15 +9,16 @@ public class Analizy {
         List<String> list = new ArrayList<>();
         boolean status = true;
         try (BufferedReader in = new BufferedReader(new FileReader(source))) {
-            if (status && (in.readLine().contains("500") || in.readLine().contains("400"))) {
-                status = false;
-                list.add(in.readLine());
+            while (in.ready()) {
+                if (status && (in.readLine().contains("500") || in.readLine().contains("400"))) {
+                    status = false;
+                    list.add(in.readLine());
+                }
+                if (!status && (in.readLine().contains("300") || in.readLine().contains("200"))) {
+                    status = true;
+                    list.add(in.readLine());
+                }
             }
-            if (!status && (in.readLine().contains("300") || in.readLine().contains("200"))) {
-                status = true;
-                list.add(in.readLine());
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
