@@ -11,14 +11,14 @@ public class Analizy {
         String l = "";
         try (BufferedReader in = new BufferedReader(new FileReader(source))) {
             for (String s = in.readLine(); s != null; s = in.readLine()) {
-                String spl = s.split(" ")[1];
+                String p = s.split(" ")[1];
                 if (status && (s.contains("500") || s.contains("400"))) {
                     status = false;
-                    l = spl.concat(";");
+                    l = p.concat(";");
                 }
                 if (!status && (s.contains("300") || s.contains("200"))) {
                     status = true;
-                    l = l.concat(spl).concat(";");
+                    l = l.concat(p).concat(";");
                     list.add(l);
                 }
             }
