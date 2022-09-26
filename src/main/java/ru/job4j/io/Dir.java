@@ -13,7 +13,8 @@ public class Dir {
         }
         for (File subfile : file.listFiles()) {
             if (subfile.isFile()) {
-                System.out.printf("%n" + subfile.getName() + ":" + subfile.length() + " byte");
+                System.out.printf("%n%s", subfile.getName());
+                System.out.printf(":%d bytes", subfile.length());
             }
         }
     }
