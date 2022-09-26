@@ -40,7 +40,7 @@ public class Analizy {
             out.println("15:01:30;15:02:32");
             out.println("15:10:30;23:12:32");
             Analizy analizy = new Analizy();
-            analizy.unavailable("./data/source.txt", "./data/target.csv");
+            analizy.unavailable("./data/source.txt", "./data/target.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
