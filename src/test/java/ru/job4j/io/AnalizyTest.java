@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class AnalizyTest {
 
     @Test
-    void Test1(@TempDir Path tempDir) throws IOException {
+    void test1(@TempDir Path tempDir) throws IOException {
         File source = tempDir.resolve("source.txt").toFile();
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("200 10:56:01");
@@ -32,7 +32,7 @@ class AnalizyTest {
         assertThat("10:57:01;10:59:01;11:01:02;11:02:02;").isEqualTo(rsl.toString());
     }
     @Test
-    void Test2(@TempDir Path tempDir) throws IOException {
+    void test2(@TempDir Path tempDir) throws IOException {
         File source = tempDir.resolve("source.txt").toFile();
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("500 10:56:01");
