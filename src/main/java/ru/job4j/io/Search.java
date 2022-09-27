@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get("C:\\Projects\\job4j_design");
+        Path start = Paths.get(".");
         search(start, p -> p.toFile().getName().endsWith(".js")).forEach(System.out::println);
     }
 
