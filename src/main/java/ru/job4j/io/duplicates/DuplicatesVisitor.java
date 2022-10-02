@@ -5,22 +5,33 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
-    public long s;
-    public String n;
-
-    public DuplicatesVisitor(FileProperty f) {
-        this.s = f.getSize();
-        this.n = f.getName();
-    }
+    HashMap<FileProperty, ArrayList<String>> fileProp = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (file.toFile().getName().equals(n) && file.toFile().length() == s) {
-            System.out.printf("%n%s", file.toAbsolutePath());
+        String n = file.toFile().getName();
+        FileProperty cur = new FileProperty(file.toFile().length(), n);
+        if (fileProp.get(cur) != null) {
+            fileProp.get(cur).add(file.toAbsolutePath().toString());
+        } else {
+            fileProp.put(cur, new ArrayList<>());
         }
         return FileVisitResult.CONTINUE;
+    }
+
+    public void print() {
+        for (FileProperty f : fileProp.keySet()) {
+            if (fileProp.get(f).size() > 1) {
+                System.out.printf("%s - %s kb %n", f.getName(), f.getSize());
+                for (String p: fileProp.get(f)) {
+                    System.out.println(p);
+                }
+            }
+        }
     }
 }
