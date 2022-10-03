@@ -56,7 +56,7 @@ public class Zip {
         st[1] = argsName.get("e");
         st[2] = argsName.get("o");
         validation(st);
-        List<Path> sources = Search.search(Paths.get(argsName.get("d")).toAbsolutePath(), s->!s.toFile().getName().endsWith(argsName.get("e")));
+        List<Path> sources = Search.search(Paths.get(argsName.get("d")).toAbsolutePath(), s -> !s.toFile().getName().endsWith(argsName.get("e")));
         Path target = Paths.get(argsName.get("o"));
         Zip zip = new Zip();
         zip.packFiles(sources, target);
