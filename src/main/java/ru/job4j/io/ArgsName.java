@@ -16,13 +16,10 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException();
-        }
+        validation(args);
         for (String arg : args) {
-            if (arg.contains("=") && arg.contains("-")) {
                 String[] s = arg.split("=");
-                String k = s[0];
+                String k = s[0].split("-")[1];
                 String v = s[1];
                 if (s.length > 2) {
                     v = v.concat("=");
@@ -30,13 +27,17 @@ public class ArgsName {
                        v = v.concat(s[j]).concat("=");
                     }
                 }
-                if (k.startsWith("-")) {
-                    k = k.substring(1, k.length());
-                    if (k.isEmpty()) {
-                        break;
-                    }
-                }
                 values.put(k, v);
+        }
+    }
+
+    public static void validation(String[] n) {
+        if (n.length == 0) {
+            throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение");
+        }
+        for (String s:n) {
+            if (!s.contains("=") || !s.contains("-") || !s.startsWith("-") || s.startsWith("-=")) {
+                throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение в строке:" + s);
             }
         }
     }
