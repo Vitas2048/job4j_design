@@ -36,6 +36,9 @@ public class ArgsName {
             throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение");
         }
         for (String s:n) {
+            if (s.split("=").length < 2) {
+                throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение в строке:" + s);
+            }
             if (!s.contains("=") || !s.contains("-") || !s.startsWith("-") || s.startsWith("-=")) {
                 throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение в строке:" + s);
             }
