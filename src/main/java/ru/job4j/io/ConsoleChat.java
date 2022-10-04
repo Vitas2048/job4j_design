@@ -24,7 +24,7 @@ public class ConsoleChat {
 
     public void run() {
         Scanner in = new Scanner(System.in);
-        String phrase = readPhrases().get((int) (random() * (readPhrases().size()-1)));
+        String phrase = readPhrases().get((int) (random() * (readPhrases().size() - 1)));
         String s = in.next();
         log.add(s);
         switch (s) {
