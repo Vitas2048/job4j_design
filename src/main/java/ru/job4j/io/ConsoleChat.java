@@ -15,7 +15,6 @@ public class ConsoleChat {
     private static final String CONTINUE = "продолжить";
     private final String path;
     private final String botAnswers;
-    private List<String> log = new ArrayList<>();
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
@@ -23,25 +22,28 @@ public class ConsoleChat {
     }
 
     public void run() {
+        boolean b = false;
+        List<String> log = new ArrayList<>();
         Scanner in = new Scanner(System.in);
-        String phrase = readPhrases().get((int) (random() * (readPhrases().size() - 1)));
-        String s = in.next();
-        log.add(s);
-        switch (s) {
-            case (CONTINUE):
-                System.out.println(phrase);
-                log.add(phrase);
-                run();
-                break;
-            case (STOP):
-                run();
-                break;
-            case (OUT):
-                break;
-            default:
-                System.out.println("Введите: закончить или продолжить или стоп");
-                run();
-                break;
+        System.out.println(readPhrases().size());
+        while (!b) {
+            String phrase = readPhrases().get((int) (random() * (readPhrases().size() - 1)));
+            String s = in.next();
+            log.add(s);
+            switch (s) {
+                case (CONTINUE):
+                    System.out.println(phrase);
+                    log.add(phrase);
+                    break;
+                case (STOP):
+                    break;
+                case (OUT):
+                    b = true;
+                    break;
+                default:
+                    System.out.println("Введите: закончить или продолжить или стоп");
+                    break;
+            }
         }
         saveLog(log);
     }
