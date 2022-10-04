@@ -10,11 +10,11 @@ import java.util.zip.ZipOutputStream;
 public class Zip {
 
     public static void validation(ArgsName argsName) {
-        if (argsName.get("d").startsWith(".")) {
-            throw new IllegalArgumentException("It's need to be file extension" + argsName.get("d"));
+        if (argsName.get("e").startsWith(".")) {
+            throw new IllegalArgumentException(String.format("It's need to be file extension %s", argsName.get("e")));
         }
-        if (argsName.get("e").endsWith(".zip")) {
-            throw new IllegalArgumentException("It's need to be zip extension" + argsName.get("e"));
+        if (argsName.get("o").endsWith(".zip")) {
+            throw new IllegalArgumentException(String.format("It's need to be zip format %s", argsName.get("o")));
         }
         File file = new File(argsName.get("d"));
         if (!file.isDirectory()) {
