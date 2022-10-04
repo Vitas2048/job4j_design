@@ -38,7 +38,7 @@ class ArgsNameTest {
     void whenNoKey() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-=?msg=Exit="}))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageStartingWith("несоответствие шаблону: -ключ=значение в строке:-=?msg=Exit=");
+                .hasMessageStartingWith("нет ключа в строке:-=?msg=Exit=");
     }
 
     @Test
@@ -59,6 +59,6 @@ class ArgsNameTest {
     void whenNoValue() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx="}))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageStartingWith("несоответствие шаблону: -ключ=значение в строке:-Xmx=");
+                .hasMessageStartingWith("нет значения в строке:-Xmx=");
     }
 }

@@ -17,22 +17,29 @@ public class ArgsName {
 
     private void parse(String[] args) {
         for (String arg : args) {
-                validation(arg);
-                String[] s = arg.split("=", 2);
-                String k = s[0].split("-")[1];
-                String v = s[1];
-                values.put(k, v);
+                if (validation(arg)) {
+                    String[] s = arg.split("=", 2);
+                    String k = s[0].split("-")[1];
+                    String v = s[1];
+                    values.put(k, v);
+                }
         }
     }
 
-    public static void validation(String n) {
-            if (n.split("=").length < 2) {
-                throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение в строке:" + n);
-            }
-            if (!n.contains("=") || !n.contains("-") || !n.startsWith("-") || n.startsWith("-=")) {
-                throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение в строке:" + n);
-            }
-
+    public static boolean validation(String n) {
+        if (!n.startsWith("-") || !n.contains("=")) {
+            throw new IllegalArgumentException(
+                    String.format("несоответствие шаблону: -ключ=значение в строке:%s", n));
+        }
+        if (n.startsWith("-=")) {
+            throw new IllegalArgumentException(
+                    String.format("нет ключа в строке:%s", n));
+        }
+        if (n.indexOf("=") == n.length() - 1) {
+            throw new IllegalArgumentException(
+                    String.format("нет значения в строке:%s", n));
+        }
+        return true;
     }
 
     public static ArgsName of(String[] args) {
