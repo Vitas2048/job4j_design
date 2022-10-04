@@ -11,14 +11,14 @@ public class Zip {
 
     public static void validation(ArgsName argsName) {
         if (argsName.get("d").startsWith(".")) {
-            throw new IllegalArgumentException("It's need to be file extension");
+            throw new IllegalArgumentException("It's need to be file extension" + argsName.get("d"));
         }
         if (argsName.get("e").endsWith(".zip")) {
-            throw new IllegalArgumentException("It's need to be zip extension");
+            throw new IllegalArgumentException("It's need to be zip extension" + argsName.get("e"));
         }
         File file = new File(argsName.get("d"));
         if (!file.isDirectory()) {
-            throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
+            throw new IllegalArgumentException(String.format("Not directory %s", argsName.get("d")));
         }
     }
 
@@ -48,7 +48,7 @@ public class Zip {
 
     public static void main(String[] args) throws IOException {
         if (args.length != 3) {
-            throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
+            throw new IllegalArgumentException("не соответствие шаблону : -d=value -e=value -o=value");
         }
         ArgsName argsName =  ArgsName.of(args);
         validation(argsName);
