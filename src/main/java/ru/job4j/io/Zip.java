@@ -9,27 +9,24 @@ import java.util.zip.ZipOutputStream;
 
 public class Zip {
 
-    public static void validation(String[] n) {
-        if (n.length != 3) {
-            throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
-        }
-        if (!n[1].startsWith(".")) {
+    public static void validation(ArgsName argsName) {
+        if (argsName.get("d").startsWith(".")) {
             throw new IllegalArgumentException("It's need to be file extension");
         }
-        if (!n[2].endsWith(".zip")) {
+        if (argsName.get("e").endsWith(".zip")) {
             throw new IllegalArgumentException("It's need to be zip extension");
         }
-        File file = new File(n[0]);
+        File file = new File(argsName.get("d"));
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
     }
 
-    public void packFiles(List<Path> sources, Path target) {
-            try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(String.valueOf(target))))) {
+    public void packFiles(List<Path> sources, String target) {
+            try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
                 for (Path p:sources) {
-                    zip.putNextEntry(new ZipEntry(String.valueOf(p)));
-                    try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(String.valueOf(p)))) {
+                    zip.putNextEntry(new ZipEntry(p.toString()));
+                    try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(p.toString()))) {
                         zip.write(out.readAllBytes());
                     }
                 }
@@ -50,16 +47,14 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
+        if (args.length != 3) {
+            throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
+        }
         ArgsName argsName =  ArgsName.of(args);
-        String[] st = new String[3];
-        st[0] = argsName.get("d");
-        st[1] = argsName.get("e");
-        st[2] = argsName.get("o");
-        validation(st);
+        validation(argsName);
         List<Path> sources = Search.search(Paths.get(argsName.get("d")).toAbsolutePath(), s -> !s.toFile().getName().endsWith(argsName.get("e")));
-        Path target = Paths.get(argsName.get("o"));
         Zip zip = new Zip();
-        zip.packFiles(sources, target);
+        zip.packFiles(sources, argsName.get("o"));
         zip.packSingleFile(
                 new File("./pom.xml"),
                 new File("./pom.zip")

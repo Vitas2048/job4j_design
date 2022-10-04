@@ -16,37 +16,30 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        validation(args);
         for (String arg : args) {
-                String[] s = arg.split("=");
+                validation(arg);
+                String[] s = arg.split("=", 2);
                 String k = s[0].split("-")[1];
                 String v = s[1];
-                if (s.length > 2) {
-                    v = v.concat("=");
-                    for (int j = 2; j < s.length; j++) {
-                       v = v.concat(s[j]).concat("=");
-                    }
-                }
                 values.put(k, v);
         }
     }
 
-    public static void validation(String[] n) {
-        if (n.length == 0) {
-            throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение");
-        }
-        for (String s:n) {
-            if (s.split("=").length < 2) {
-                throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение в строке:" + s);
+    public static void validation(String n) {
+            if (n.split("=").length < 2) {
+                throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение в строке:" + n);
             }
-            if (!s.contains("=") || !s.contains("-") || !s.startsWith("-") || s.startsWith("-=")) {
-                throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение в строке:" + s);
+            if (!n.contains("=") || !n.contains("-") || !n.startsWith("-") || n.startsWith("-=")) {
+                throw new IllegalArgumentException("несоответствие шаблону: -ключ=значение в строке:" + n);
             }
-        }
+
     }
 
     public static ArgsName of(String[] args) {
         ArgsName names = new ArgsName();
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Отсутствуют параметры");
+        }
         names.parse(args);
         return names;
     }

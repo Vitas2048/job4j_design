@@ -31,30 +31,34 @@ class ArgsNameTest {
     @Test
     void whenWrongSomeArgument() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{}))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class).hasMessageStartingWith("Отсутствуют параметры");
     }
 
     @Test
     void whenNoKey() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-=?msg=Exit="}))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("несоответствие шаблону: -ключ=значение в строке:-=?msg=Exit=");
     }
 
     @Test
     void whenNoEqual() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx:512"}))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("несоответствие шаблону: -ключ=значение в строке:-Xmx:512");
     }
 
     @Test
     void whenNoMinus() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"Xmx=512"}))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("несоответствие шаблону: -ключ=значение в строке:Xmx=512");
     }
 
     @Test
     void whenNoValue() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx="}))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("несоответствие шаблону: -ключ=значение в строке:-Xmx=");
     }
 }
