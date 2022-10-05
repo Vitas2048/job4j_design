@@ -23,27 +23,26 @@ public class ConsoleChat {
 
     public void run() {
         boolean b = false;
+        boolean f = false;
+        List<String> phrases = readPhrases();
         List<String> log = new ArrayList<>();
         Scanner in = new Scanner(System.in);
-        System.out.println(readPhrases().size());
         while (!b) {
-            String phrase = readPhrases().get((int) (random() * (readPhrases().size() - 1)));
+            String phrase = phrases.get((int) (random() * (phrases.size() - 1)));
             String s = in.next();
             log.add(s);
-            switch (s) {
-                case (CONTINUE):
-                    System.out.println(phrase);
-                    log.add(phrase);
-                    break;
-                case (STOP):
-                    break;
-                case (OUT):
-                    b = true;
-                    break;
-                default:
-                    System.out.println("Введите: закончить или продолжить или стоп");
-                    break;
+            if (!f || s.equals(CONTINUE) || s.equals(OUT)) {
+                switch (s) {
+                    case (CONTINUE) -> f = false;
+                    case (STOP) -> f = true;
+                    case (OUT) -> b = true;
+                    default -> {
+                        System.out.println(phrase);
+                        log.add(phrase);
+                    }
+                }
             }
+
         }
         saveLog(log);
     }
@@ -59,7 +58,7 @@ public class ConsoleChat {
     }
 
     private void saveLog(List<String> log) {
-        try (FileOutputStream out = new FileOutputStream("log.txt")) {
+        try (FileOutputStream out = new FileOutputStream(path)) {
             for (String s:log) {
                 out.write((s).getBytes());
                 out.write(System.lineSeparator().getBytes());
