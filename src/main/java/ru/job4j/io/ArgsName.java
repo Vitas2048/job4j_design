@@ -19,7 +19,7 @@ public class ArgsName {
         for (String arg : args) {
                 if (validation(arg)) {
                     String[] s = arg.split("=", 2);
-                    String k = s[0].split("-")[1];
+                    String k = s[0].substring(1);
                     String v = s[1];
                     values.put(k, v);
                 }
