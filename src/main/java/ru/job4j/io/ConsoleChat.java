@@ -33,13 +33,19 @@ public class ConsoleChat {
             log.add(s);
             if (!f || s.equals(CONTINUE) || s.equals(OUT)) {
                 switch (s) {
-                    case (CONTINUE) -> f = false;
-                    case (STOP) -> f = true;
-                    case (OUT) -> b = true;
-                    default -> {
+                    case (CONTINUE):
+                        f = false;
+                        break;
+                    case (STOP):
+                        f = true;
+                        break;
+                    case (OUT):
+                        b = true;
+                        break;
+                    default:
                         System.out.println(phrase);
                         log.add(phrase);
-                    }
+                        break;
                 }
             }
 
