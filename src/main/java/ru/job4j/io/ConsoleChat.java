@@ -31,7 +31,7 @@ public class ConsoleChat {
             String phrase = phrases.get((int) (random() * (phrases.size() - 1)));
             String s = in.next();
             log.add(s);
-            if (!f || s.equals(CONTINUE) || s.equals(OUT)) {
+            if (!f || CONTINUE.equals(s) || OUT.equals(s)) {
                 switch (s) {
                     case (CONTINUE):
                         f = false;
