@@ -20,8 +20,7 @@ public class CSVReader {
         while (scanner.hasNext()) {
             filter.add(scanner.next());
         }
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(argsName.get("path")));
+        try (BufferedReader in = new BufferedReader(new FileReader(argsName.get("path")))) {
             String line;
             while ((line = in.readLine()) != null) {
                 int i = 0;
@@ -44,13 +43,15 @@ public class CSVReader {
             }
             try (FileOutputStream out = new FileOutputStream(path)) {
                 for (String s: res) {
-                    if (path.equals("stdout")) {
+                    if ("stdout".equals(path)) {
                         System.out.println(s);
                     } else {
                         out.write(s.getBytes());
                         out.write(System.lineSeparator().getBytes());
                     }
                 }
+                }  catch (Exception e) {
+                    e.printStackTrace();
                 }
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,7 +63,7 @@ public class CSVReader {
             throw new IllegalArgumentException(
                     String.format("необходимо ввести разделитель в строке %s", argsName.get("delimiter")));
         }
-        if (!argsName.get("out").equals("stdout") && !(argsName.get("out")).endsWith(".csv")) {
+        if (!"stdout".equals(argsName.get("out")) && !(argsName.get("out")).endsWith(".csv")) {
             throw new IllegalArgumentException(
                     String.format("необходимо ввести stdout для вывода на консоль или путь к файлу в строке %s",
                             argsName.get("out")));
