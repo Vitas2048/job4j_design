@@ -16,13 +16,12 @@ public class EchoServer {
                     String s = in.readLine();
                     if (s.contains("?msg=Hello")) {
                         out.write("Hello, dear friend.".getBytes());
-                    }
-                    if (s.contains("?msg=Exit")) {
-                        server.close();
-                    }
-                    if (!s.contains("?msg=Exit") && !s.contains("?msg=Hello") && s.contains("?msg=")) {
-                        out.write("What".getBytes());
-                    }
+                    } else
+                        if (s.contains("?msg=Exit")) {
+                            server.close();
+                        } else {
+                            out.write("What".getBytes());
+                        }
                     for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
                         System.out.println(str);
                     }
