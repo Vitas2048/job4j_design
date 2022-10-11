@@ -18,7 +18,7 @@ public class Main {
         JSONArray jsonStatuses = new JSONArray(list);
 
         /* JSONObject напрямую методом put */
-        final Person person = new Person(false, 30, new Contact("11-111"),new String[] {"Worker", "Married"});
+        final Person person = new Person(false, 30, new Contact("11-111"), new String[] {"Worker", "Married"});
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sex", person.isSex());
         jsonObject.put("age", person.getAge());
