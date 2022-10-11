@@ -9,6 +9,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Monitor {
+    private final boolean gamesupport;
+    private final int frequency;
+    private final String company;
+    private final Contact contact;
+    private final String[] shops;
+
+    public Monitor(boolean gamesupport, int frequency, String company, Contact contact, String[] shops) {
+        this.gamesupport = gamesupport;
+        this.frequency = frequency;
+        this.company = company;
+        this.contact = contact;
+        this.shops = shops;
+    }
+
     public boolean isGamesupport() {
         return gamesupport;
     }
@@ -29,19 +43,6 @@ public class Monitor {
         return shops;
     }
 
-    private final boolean gamesupport;
-    private final int frequency;
-    private final String company;
-    private final Contact contact;
-    private final String[] shops;
-
-    public Monitor(boolean gamesupport, int frequency, String company, Contact contact, String[] shops) {
-        this.gamesupport = gamesupport;
-        this.frequency = frequency;
-        this.company = company;
-        this.contact = contact;
-        this.shops = shops;
-    }
 
     @Override
     public String toString() {
