@@ -49,7 +49,7 @@ public class Monitor {
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";
-        try (StringWriter writer = new StringWriter()){
+        try (StringWriter writer = new StringWriter()) {
             marshaller.marshal(monitor, writer);
             xml = writer.getBuffer().toString();
             System.out.println(xml);
