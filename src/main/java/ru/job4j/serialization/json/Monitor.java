@@ -1,12 +1,34 @@
 package ru.job4j.serialization.json;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Monitor {
+    public boolean isGamesupport() {
+        return gamesupport;
+    }
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public String[] getShops() {
+        return shops;
+    }
+
     private final boolean gamesupport;
     private final int frequency;
     private final String company;
@@ -33,21 +55,18 @@ public class Monitor {
 
     public static void main(String[] args) {
         final Monitor monitor = new Monitor(true, 144, "Asus", new Contact("88005553535"), new String[] {"DNS", "MVIDEO"});
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(monitor));
-        final String monitorJson =
-                "{"
-                + "\"gamesupport\":false,"
-                + "\"frequency\":75,"
-                + "\"company\":Acer,"
-                + "\"contact\":"
-                + "{"
-                + "\"phone\":\"5553535\""
-                + "},"
-                + "\"shops\":"
-                + "[\"Eldorado\", \"XCOM\"]"
-                + "}";
-        final Monitor monitor1 = gson.fromJson(monitorJson, Monitor.class);
-        System.out.println(monitor1.toString());
+        JSONObject jsonContact = new JSONObject("{\"phone\":\"88005553535\"}");
+        List<String> list = new ArrayList<>();
+        list.add("DNS");
+        list.add("MVIDEO");
+        JSONArray jsonshops = new JSONArray(list);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("gamesupport", monitor.isGamesupport());
+        jsonObject.put("frequency", monitor.getFrequency());
+        jsonObject.put("company", monitor.getCompany());
+        jsonObject.put("contact", jsonContact);
+        jsonObject.put("shops", jsonshops);
+        System.out.println(jsonObject);
+        System.out.println(new JSONObject(monitor));
     }
 }
