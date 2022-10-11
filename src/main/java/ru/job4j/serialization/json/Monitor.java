@@ -32,7 +32,7 @@ public class Monitor {
     }
 
     public static void main(String[] args) {
-        final Monitor monitor = new Monitor(true, 144, "Asus", new Contact("88005553535"),new String[] {"DNS", "MVIDEO"});
+        final Monitor monitor = new Monitor(true, 144, "Asus", new Contact("88005553535"), new String[] {"DNS", "MVIDEO"});
         final Gson gson = new GsonBuilder().create();
         System.out.println(gson.toJson(monitor));
         final String monitorJson =
@@ -45,7 +45,7 @@ public class Monitor {
                 + "\"phone\":\"5553535\""
                 + "},"
                 + "\"shops\":"
-                +"[\"Eldorado\", \"XCOM\"]"
+                + "[\"Eldorado\", \"XCOM\"]"
                 + "}";
         final Monitor monitor1 = gson.fromJson(monitorJson, Monitor.class);
         System.out.println(monitor1.toString());
