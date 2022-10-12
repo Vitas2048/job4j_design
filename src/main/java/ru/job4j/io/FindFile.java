@@ -68,7 +68,7 @@ public class FindFile {
         if ("name".equals(type) && !param.contains(".")) {
             throw new IllegalArgumentException((String.format("для нахождения по имени нужно указать расширение - %s", param)));
         }
-        if ("mask".equals(type) && !param.contains("?") && !param.contains("*")&& !param.contains(".")) {
+        if ("mask".equals(type) && !param.contains("?") && !param.contains("*") && !param.contains(".")) {
             throw new IllegalArgumentException((String.format("для нахождения по маске должны быть символы '*', '?', '.'  - %s", param)));
         }
 
