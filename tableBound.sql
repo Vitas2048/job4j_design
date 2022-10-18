@@ -1,18 +1,19 @@
 create table pets(
     id serial primary key,
     nickname varchar(255)
+    owners_id int references owners(id)
 );
 create table owners(
     id serial primary key,
     firstname varchar(255),
-    pet_id int references pets(id)
 );
-insert into pets(nickname) values ('Reks');
-insert into owners(firstname, pet_id) values ('Alex', 1);
-insert into owners(firstname, pet_id) values ('Maria', 1);
+insert into pets(nickname, owners_id) values ('Reks', 1);
+insert into pets(nickname, owners_id) values ('Reks', 2);
+insert into owners(firstname) values ('Alex');
+insert into owners(firstname) values ('Maria');
 
-select * from owners;
-select * from pets where id in (select pet_id from owners);
+select * from pets;
+select * from owners where id in (select owner_id from pet);
 
 
 create table cellphone(
