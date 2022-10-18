@@ -59,5 +59,6 @@ public class Zip {
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
+
     }
 }

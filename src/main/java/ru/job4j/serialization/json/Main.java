@@ -30,5 +30,6 @@ public class Main {
 
         /* Преобразуем объект person в json-строку */
         System.out.println(new JSONObject(person).toString());
+
     }
 }
