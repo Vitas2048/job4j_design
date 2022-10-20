@@ -24,7 +24,8 @@ group by t.name;
 select p.name, t.name
 from type t
 join product p 
-on p.type_id=t.id and t.name = 'молоко' or p.type_id = t.id and t.name = 'сыр';
+on p.type_id=t.id 
+where t.name = 'молоко' or t.name = 'сыр';
 
 select t.name
 from type t 
