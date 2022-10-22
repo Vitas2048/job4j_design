@@ -1,4 +1,3 @@
-
 create view show_engines_where_morethan3_bodies_andmorethan3_transmisiions
 as select e.name engine, count(b.name) bodies, count(t.name) transmissions
 from cars c
