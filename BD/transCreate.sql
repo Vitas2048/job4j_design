@@ -3,6 +3,7 @@ create table numbers(
 	name varchar(250)
 );
 
+
 insert into numbers(name) values('one');
 insert into numbers(name) values('two');
 insert into numbers(name) values('three');
