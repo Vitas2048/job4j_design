@@ -1,4 +1,6 @@
-package ru.job4j.io;
+package ru.job4j;
+
+import ru.job4j.io.Config;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,10 +9,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Settings {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
-        Class.forName("org.postgresql.Driver");
-        Config config = new Config("./../app.properties");
+    public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
+        Config config = new Config("./src/main/resources/app.properties");
         config.load();
+        Class.forName(config.value("class"));
         String url = config.value("url");
         String login = config.value("login");
         String password = config.value("password");
