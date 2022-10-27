@@ -12,15 +12,16 @@ public class TableEditor implements AutoCloseable {
 
     private Properties properties;
 
-    public void doWithStatement(String in) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(in);
-        }
-    }
 
     public TableEditor(Properties properties) throws SQLException, IOException, ClassNotFoundException {
         this.properties = properties;
         initConnection();
+    }
+
+    public void doWithStatement(String in) throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(in);
+        }
     }
 
     private void initConnection() throws IOException, ClassNotFoundException, SQLException {
@@ -105,7 +106,7 @@ public class TableEditor implements AutoCloseable {
 
     public static void main(String[] args) throws Exception {
         Properties config = new Properties();
-        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("./app.properties")) {
+        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
             config.load(in);
         }
         try (TableEditor tableEditor = new TableEditor(config)) {
