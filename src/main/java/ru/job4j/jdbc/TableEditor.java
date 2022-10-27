@@ -12,73 +12,68 @@ public class TableEditor implements AutoCloseable {
 
     private Properties properties;
 
+    public void doWithStatement(String in) throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(in);
+        }
+    }
+
     public TableEditor(Properties properties) throws SQLException, IOException, ClassNotFoundException {
         this.properties = properties;
         initConnection();
     }
 
     private void initConnection() throws IOException, ClassNotFoundException, SQLException {
-        Properties config = properties;
-            String url = config.getProperty("url");
-            String login = config.getProperty("login");
-            String password = config.getProperty("password");
-            Class.forName(config.getProperty("class"));
+            String url = properties.getProperty("url");
+            String login = properties.getProperty("login");
+            String password = properties.getProperty("password");
+            Class.forName(properties.getProperty("class"));
             connection = DriverManager.getConnection(url, login, password);
         }
 
     public void createTable(String tableName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
+        String sql = String.format(
                     "create table if not exists %s();",
                     tableName
-            );
-            statement.execute(sql);
-        }
+        );
+        doWithStatement(sql);
     }
 
     public void dropTable(String tableName) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
+        String sql = String.format(
                     "drop table %s;",
                     tableName
-            );
-            statement.execute(sql);
-        }
+        );
+        doWithStatement(sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
+        String sql = String.format(
                     "alter table %s add column %s %s;",
                     tableName,
                     columnName,
                     type
-            );
-            statement.execute(sql);
-        }
+        );
+        doWithStatement(sql);
     }
 
     public void dropColumn(String tableName, String columnName) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
+        String sql = String.format(
                     "alter table %s drop column %s;",
                     tableName,
                     columnName
-            );
-            statement.execute(sql);
-        }
+        );
+        doWithStatement(sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
+        String sql = String.format(
                     "alter table %s rename column %s to %s;",
                     tableName,
                     columnName,
                     newColumnName
-            );
-            statement.execute(sql);
-        }
+        );
+        doWithStatement(sql);
     }
 
 
@@ -113,20 +108,22 @@ public class TableEditor implements AutoCloseable {
         try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("./app.properties")) {
             config.load(in);
         }
-        TableEditor tableEditor = new TableEditor(config);
-        tableEditor.createTable("Yamakasi");
-        System.out.println(tableEditor.getTableScheme("Yamakasi"));
-        tableEditor.addColumn("Yamakasi", "speed", "text");
-        System.out.println(tableEditor.getTableScheme("Yamakasi"));
-        tableEditor.addColumn("Yamakasi", "jump", "text");
-        System.out.println(tableEditor.getTableScheme("Yamakasi"));
-        tableEditor.addColumn("Yamakasi", "sex", "text");
-        System.out.println(tableEditor.getTableScheme("Yamakasi"));
-        tableEditor.renameColumn("Yamakasi", "jump", "endurance");
-        System.out.println(tableEditor.getTableScheme("Yamakasi"));
-        tableEditor.dropColumn("Yamakasi", "sex");
-        System.out.println(tableEditor.getTableScheme("Yamakasi"));
-        tableEditor.dropTable("Yamakasi");
-        System.out.println(tableEditor.getTableScheme("Yamakasi"));
+        try (TableEditor tableEditor = new TableEditor(config)) {
+            tableEditor.createTable("Yamakasi");
+            System.out.println(tableEditor.getTableScheme("Yamakasi"));
+            tableEditor.addColumn("Yamakasi", "speed", "text");
+            System.out.println(tableEditor.getTableScheme("Yamakasi"));
+            tableEditor.addColumn("Yamakasi", "jump", "text");
+            System.out.println(tableEditor.getTableScheme("Yamakasi"));
+            tableEditor.addColumn("Yamakasi", "sex", "text");
+            System.out.println(tableEditor.getTableScheme("Yamakasi"));
+            tableEditor.renameColumn("Yamakasi", "jump", "endurance");
+            System.out.println(tableEditor.getTableScheme("Yamakasi"));
+            tableEditor.dropColumn("Yamakasi", "sex");
+            System.out.println(tableEditor.getTableScheme("Yamakasi"));
+            tableEditor.dropTable("Yamakasi");
+            System.out.println(tableEditor.getTableScheme("Yamakasi"));
+        }
+
     }
 }
