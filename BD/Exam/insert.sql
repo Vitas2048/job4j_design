@@ -1,0 +1,22 @@
+insert into company(id, name) values (1, 'First Company');
+insert into company(id, name) values (2, 'Second Company');
+insert into company(id, name) values (3, 'Third Company');
+insert into company(id, name) values (4, 'Fourth Company');
+insert into company(id, name) values (5, 'Fifth Company');
+insert into company(id, name) values (6, 'Six Company');
+insert into company(id, name) values (7, 'Seven Company');
+insert into company(id, name) values (8, 'Eight Company');
+
+insert into person(id, name, company_id) values(1, 'first person', 1);
+insert into person(id, name, company_id) values(2, 'second person', 1);
+insert into person(id, name, company_id) values(3, 'third person', 2);
+insert into person(id, name, company_id) values(4, 'fourth person', 2);
+insert into person(id, name, company_id) values(5, 'fifth person', 2);
+insert into person(id, name, company_id) values(6, 'Sixth person', 3);
+insert into person(id, name, company_id) values(7, 'seventh person', 4);
+insert into person(id, name, company_id) values(8, 'eighth person', 5);
+insert into person(id, name, company_id) values(9, 'nineth person', 5);
+insert into person(id, name, company_id) values(10, 'tenth person', 6);
+insert into person(id, name, company_id) values(11, 'eleventh person', 6);
+insert into person(id, name, company_id) values(12, 'twelfth person', 6);
+insert into person(id, name, company_id) values(13, 'thirteenth person', 8);
