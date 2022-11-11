@@ -1,7 +1,6 @@
 package ru.job4j.gc.leak;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class PostStore {
 
@@ -10,7 +9,7 @@ public class PostStore {
     private int i = 1;
 
     public Post add(Post post) {
-        Integer id = i++;
+        int id = i++;
         post.setId(id);
         posts.put(id, post);
         return post;

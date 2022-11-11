@@ -4,6 +4,33 @@ import java.util.List;
 import java.util.Objects;
 
 public class Post {
+
+    private int id;
+
+    private String text;
+
+    private List<Comment> comments;
+
+    public Post(int id, String text, List<Comment> comments) {
+        this.id = id;
+        this.text = text;
+        this.comments = comments;
+    }
+
+    public Post(String text, List<Comment> comments) {
+        this.text = text;
+        this.comments = comments;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /*остальные getter/setter*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -16,32 +43,4 @@ public class Post {
     public int hashCode() {
         return Objects.hash(id, text, comments);
     }
-
-    private Integer id;
-
-    private String text;
-
-    private List<Comment> comments;
-
-    public Post(Integer id, String text, List<Comment> comments) {
-        this.id = id;
-        this.text = text;
-        this.comments = comments;
-    }
-
-    public Post(String text, List<Comment> comments) {
-        this.text = text;
-        this.comments = comments;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /*остальные getter/setter*/
-
 }
