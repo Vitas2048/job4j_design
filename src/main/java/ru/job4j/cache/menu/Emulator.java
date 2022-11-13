@@ -5,35 +5,58 @@ import ru.job4j.cache.DirFileCache;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Scanner;
 
 public class Emulator {
+
+    public static final String MENU = String.format("%s%n%s%n%s%n%s",
+            "Введите 0, чтобы указать директорию.",
+            "Введите 1, загрузить файл в кэш.",
+            "Введите 2, вывести кэш на экран.",
+            "Введите 3, чтобы закончить."
+    );
+
+    public static final int SET_DIRECTORY = 0;
+
+    public static final int INSERT_CACHE = 1;
+
+    public static final int SHOW_CACHE = 2;
+
+    public static final int EXIT = 3;
 
     public static DirFileCache setDir(String s) {
         return new DirFileCache(s);
     }
 
-    public static void loadCache(DirFileCache cache, String key, String source) {
-        String rsl = "";
-        try (BufferedReader in = new BufferedReader(new FileReader(source.concat(key)))) {
-            for (String s = in.readLine(); s != null; s = in.readLine()) {
-                String s1 = String.format("%s%n", s);
-                rsl = String.format("%s%s", rsl, s1);
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        DirFileCache dir = null;
+        boolean run = true;
+        String source = null;
+        while (run) {
+            System.out.println(MENU);
+            int userChoice = Integer.parseInt(scanner.nextLine());
+            if (SET_DIRECTORY == userChoice) {
+                System.out.println("Укажите директорию");
+                source = scanner.nextLine();
+                dir = new DirFileCache(source);
+            } else if (INSERT_CACHE == userChoice) {
+                System.out.println("Укажите имя файла, с которого будут считаны данные");
+                String fileName = scanner.nextLine();
+                dir.put(fileName, "fileCache");
+                if (dir.get(fileName) == null) {
+                    System.out.println("Ошибка чтения файла, возможно неверно указан путь");
+                }
+            } else if (SHOW_CACHE == userChoice) {
+                System.out.println("Укажите файл, данные которого вывести на экране");
+                String file = scanner.nextLine();
+                System.out.println(dir.get(file));
+            } else if (EXIT == userChoice) {
+                System.out.println("Завершение программы...");
+                run = false;
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
-        cache.put(key, rsl);
-    }
-
-    public static String getCache(DirFileCache s, String key) {
-        return s.get(key);
-    }
-
-    public static void main(String[] args) {
-        String source = "./src/main/java/ru/job4j/cache/menu/data/";
-        DirFileCache cache = setDir(source);
-        loadCache(cache, "Adress.txt", source);
-        loadCache(cache, "Names.txt", source);
-        System.out.println(getCache(cache, "Names.txt"));
     }
 }
