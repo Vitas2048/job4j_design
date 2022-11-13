@@ -18,7 +18,7 @@ public class SoftRef {
         try (BufferedReader in = new BufferedReader(new FileReader("input.txt"))) {
             for (String s = in.readLine(); s != null; s = in.readLine()) {
                 j++;
-                if (j==i) {
+                if (j == i) {
                     softR = new SoftReference<>(s);
                     w = softR.get();
                     break;
