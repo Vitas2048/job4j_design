@@ -11,12 +11,12 @@ import java.util.Scanner;
 
 public class Emulator {
 
-    public static final String MENU = String.format("%s%n%s%n%s%n%s",
-            "Введите 0, чтобы указать директорию.",
-            "Введите 1, загрузить файл в кэш.",
-            "Введите 2, вывести кэш на экран.",
-            "Введите 3, чтобы закончить."
-    );
+    public static final String MENU = """
+                Введите 0, чтобы указать директорию.
+                Введите 1, загрузить файл в кэш.
+                Введите 2, вывести кэш на экран.
+                Введите 3, чтобы закончить.
+                """;
 
     public static final int SET_DIRECTORY = 0;
 
@@ -34,7 +34,7 @@ public class Emulator {
         Scanner scanner = new Scanner(System.in);
         DirFileCache dir = null;
         boolean run = true;
-        String source = null;
+        String source;
         while (run) {
             System.out.println(MENU);
             int userChoice = Integer.parseInt(scanner.nextLine());
@@ -45,10 +45,7 @@ public class Emulator {
             } else if (INSERT_CACHE == userChoice) {
                 System.out.println("Укажите имя файла, с которого будут считаны данные");
                 String fileName = scanner.nextLine();
-                dir.put(fileName, "fileCache");
-                if (dir.get(fileName) == null) {
-                    System.out.println("Ошибка чтения файла, возможно неверно указан путь");
-                }
+                dir.get(fileName);
             } else if (SHOW_CACHE == userChoice) {
                 System.out.println("Укажите файл, данные которого вывести на экране");
                 String file = scanner.nextLine();
