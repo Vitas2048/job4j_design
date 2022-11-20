@@ -30,4 +30,10 @@ public class Person {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static void main(String[] args) {
+        Person person = new Person(15, "Vlad");
+        String vlad = new String("Vlad");
+        System.out.println(person.name == vlad.intern());
+    }
 }
