@@ -2,7 +2,7 @@ package ru.job4j.solid.srp;
 
 import java.io.FileOutputStream;
 
-public class consolePrint implements Print {
+public class ConsolePrint implements Print {
 
     @Override
     public void print() {

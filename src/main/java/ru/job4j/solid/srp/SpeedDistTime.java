@@ -1,7 +1,7 @@
 package ru.job4j.solid.srp;
 
 public class SpeedDistTime implements SpeedDistanceTime {
-    public SpeedDistTime(){
+    public SpeedDistTime() {
 
     }
 
