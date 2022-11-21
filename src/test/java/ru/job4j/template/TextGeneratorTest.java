@@ -52,7 +52,6 @@ class TextGeneratorTest {
         mapGen.put("subject", "you");
         assertThrows(IllegalArgumentException.class, () -> {
             mapGen.put("subject1", "you1");
-            ;
         });
     }
 }
