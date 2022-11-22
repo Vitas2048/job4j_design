@@ -1,4 +1,4 @@
-package ru.job4j.solid.srp;
+package ru.job4j.ood.srp;
 
 public class SpeedDistTime implements SpeedDistanceTime {
     public SpeedDistTime() {

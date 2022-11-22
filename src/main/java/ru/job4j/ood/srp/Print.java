@@ -1,4 +1,4 @@
-package ru.job4j.solid.srp;
+package ru.job4j.ood.srp;
 
 public interface Print {
     void print();
