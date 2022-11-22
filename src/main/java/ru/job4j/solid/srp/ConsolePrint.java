@@ -1,13 +1,14 @@
 package ru.job4j.solid.srp;
 
 import java.io.FileOutputStream;
+import java.util.Random;
 
 public class ConsolePrint implements Print {
 
     @Override
     public void print() {
         SpeedDistTime speed = new SpeedDistTime();
-        System.out.println(speed);
+        System.out.println(calculate());
     }
 
     public void printFile() {
@@ -18,5 +19,14 @@ public class ConsolePrint implements Print {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public int calculate() {
+        return 5 + 5;
+    }
+
+    public int generate() {
+        Random random = new Random();
+        return random.nextInt();
     }
 }
