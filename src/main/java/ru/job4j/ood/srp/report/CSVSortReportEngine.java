@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class CSVSortReportEngine implements Report{
+public class CSVSortReportEngine implements Report {
 
     private final Store store;
 
@@ -40,23 +40,5 @@ public class CSVSortReportEngine implements Report{
                     .append(System.lineSeparator());
         }
         return text.toString();
-    }
-
-    public static void main(String[] args) {
-        MemStore store = new MemStore();
-        Calendar now = Calendar.getInstance();
-        InMemoryCurrencyConverter converter = new InMemoryCurrencyConverter();
-        Employee worker = new Employee("Ivan", now, now, 100);
-        Employee worker1 = new Employee("Mike", now, now, 120);
-        Employee worker2 = new Employee("Susan", now, now, 150);
-        store.add(worker);
-        store.add(worker1);
-        store.add(worker2);
-        Report engine = new CSVSortReportEngine(store, converter);
-        try (FileOutputStream out = new FileOutputStream("result.csv")) {
-            out.write((engine.generate(s->true)).getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
