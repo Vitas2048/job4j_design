@@ -50,8 +50,10 @@ class TextGeneratorTest {
         HashMap<String, String> mapGen = new HashMap<>();
         mapGen.put("name", "Petr Arsentev");
         mapGen.put("subject", "you");
+        mapGen.put("subject2", "you1");
+        String input = "I am a ${name}, Who are ${subject}? ";
         assertThrows(IllegalArgumentException.class, () -> {
-            mapGen.put("subject1", "you1");
+            generator.produce(input, mapGen);
         });
     }
 }
