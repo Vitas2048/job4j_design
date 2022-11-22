@@ -8,12 +8,13 @@ import ru.job4j.ood.srp.store.Store;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class SortReportEngine implements Report {
+public class AccountingDepartmentReport implements Report {
+
     private final Store store;
 
     private final CurrencyConverter converter;
 
-    public SortReportEngine(Store store, CurrencyConverter converter) {
+    public AccountingDepartmentReport(Store store, CurrencyConverter converter) {
         this.store = store;
         this.converter = converter;
     }
@@ -27,7 +28,7 @@ public class SortReportEngine implements Report {
                 .stream()
                 .sorted((o1, o2) -> (int) (o2.getSalary() - o1.getSalary()))
                 .toList();
-                employees.forEach(x -> x.setSalary(converter.convert(Currency.USD, x.getSalary(), Currency.RUB)));
+        employees.forEach(x -> x.setSalary(converter.convert(Currency.USD, x.getSalary(), Currency.RUB)));
         for (Employee employee : employees) {
             text.append(employee.getName()).append(" ")
                     .append(employee.getSalary())

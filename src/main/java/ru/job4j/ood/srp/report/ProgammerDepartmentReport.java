@@ -2,24 +2,20 @@ package ru.job4j.ood.srp.report;
 
 import ru.job4j.ood.srp.currency.Currency;
 import ru.job4j.ood.srp.currency.CurrencyConverter;
-import ru.job4j.ood.srp.currency.InMemoryCurrencyConverter;
 import ru.job4j.ood.srp.model.Employee;
-import ru.job4j.ood.srp.store.MemStore;
 import ru.job4j.ood.srp.store.Store;
 
-import java.io.FileOutputStream;
-import java.util.Calendar;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class CSVSortReportEngine implements Report {
+public class ProgammerDepartmentReport implements Report {
 
     private final Store store;
 
     private final CurrencyConverter converter;
 
 
-    public CSVSortReportEngine(Store store, CurrencyConverter converter) {
+    public ProgammerDepartmentReport(Store store, CurrencyConverter converter) {
         this.store = store;
         this.converter = converter;
     }
