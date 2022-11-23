@@ -26,8 +26,7 @@ public class AccountingDepartmentReport implements Report {
                 .append(System.lineSeparator());
         List<Employee> employees = store.findBy(filter)
                 .stream()
-                .sorted((o1, o2) -> (int) (o2.getSalary() - o1.getSalary()))
-                .toList();
+                .sorted((o1, o2) -> (int) (o2.getSalary() - o1.getSalary())).toList();
         employees.forEach(x -> x.setSalary(converter.convert(Currency.USD, x.getSalary(), Currency.RUB)));
         for (Employee employee : employees) {
             text.append(employee.getName()).append(" ")
