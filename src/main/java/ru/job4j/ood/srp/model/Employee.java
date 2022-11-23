@@ -12,10 +12,10 @@ import java.util.Objects;
 public class Employee {
     @XmlAttribute
     private String name;
-    @XmlElement(name="hired")
+    @XmlElement(name = "hired")
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Calendar hired;
-    @XmlElement(name="fired")
+    @XmlElement(name = "fired")
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Calendar fired;
     @XmlAttribute

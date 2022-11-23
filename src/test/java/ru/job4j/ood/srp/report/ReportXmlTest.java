@@ -23,7 +23,7 @@ class ReportXmlTest {
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Report engine = new ReportXml(store);
         String expected1 = "<employee name=\"" + worker.getName() + "\" salary=\"" + worker.getSalary() + "\">";
-        String expected2 = "    <hired>"+ parser.parse(worker.getHired()) +"</hired>";
+        String expected2 = "    <hired>" + parser.parse(worker.getHired()) + "</hired>";
         String expected3 = "    <fired>" + parser.parse(worker.getFired()) + "</fired>";
         String expected4 = "</employee>";
         String expected5 = "";
