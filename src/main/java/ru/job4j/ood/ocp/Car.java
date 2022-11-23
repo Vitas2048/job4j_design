@@ -2,7 +2,7 @@ package ru.job4j.ood.ocp;
 
 public class Car {
 
-    public int speed() {
-        return 0;
+    public String speed() {
+        return null;
     }
 }
