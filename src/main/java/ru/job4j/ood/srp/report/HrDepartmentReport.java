@@ -2,20 +2,26 @@ package ru.job4j.ood.srp.report;
 
 import ru.job4j.ood.srp.currency.Currency;
 import ru.job4j.ood.srp.currency.CurrencyConverter;
+import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.Store;
 
+import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class HrDepartmentReport implements Report {
     private final Store store;
 
-    private final CurrencyConverter converter;
+    private static final Comparator<Employee> COMPARATOR = Comparator.comparingDouble(Employee::getSalary).reversed();
 
-    public HrDepartmentReport(Store store, CurrencyConverter converter) {
+    private final DateTimeParser<Calendar> dateTimeParser;
+
+    public HrDepartmentReport(Store store, DateTimeParser<Calendar> dateTimeParser) {
         this.store = store;
-        this.converter = converter;
+        this.dateTimeParser = dateTimeParser;
     }
 
     @Override
@@ -23,12 +29,7 @@ public class HrDepartmentReport implements Report {
         StringBuilder text = new StringBuilder();
         text.append("Name; Salary;")
                 .append(System.lineSeparator());
-        List<Employee> employees = store.findBy(filter)
-                .stream()
-                .sorted((o1, o2) -> (int) (o2.getSalary() - o1.getSalary()))
-                .toList();
-                employees.forEach(x -> x.setSalary(converter.convert(Currency.USD, x.getSalary(), Currency.RUB)));
-        for (Employee employee : employees) {
+        for (Employee employee : store.findBy(filter).stream().sorted(COMPARATOR).toList()) {
             text.append(employee.getName()).append(" ")
                     .append(employee.getSalary())
                     .append(System.lineSeparator());

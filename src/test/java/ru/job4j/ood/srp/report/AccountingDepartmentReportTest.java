@@ -27,18 +27,24 @@ class AccountingDepartmentReportTest {
         store.add(worker);
         store.add(worker1);
         store.add(worker2);
-        Report engine = new HrDepartmentReport(store, converter);
+        Report engine = new AccountingDepartmentReport(store, converter, parser);
         StringBuilder expect = new StringBuilder()
-                .append("Name; Salary;")
-                .append(System.lineSeparator())
-                .append(worker2.getName()).append(" ")
-                .append(converter.convert(Currency.USD, worker2.getSalary(), Currency.RUB))
-                .append(System.lineSeparator())
-                .append(worker1.getName()).append(" ")
-                .append(converter.convert(Currency.USD, worker1.getSalary(), Currency.RUB))
+                .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
                 .append(worker.getName()).append(" ")
+                .append(parser.parse(worker.getHired())).append(" ")
+                .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.USD, worker.getSalary(), Currency.RUB))
+                .append(System.lineSeparator())
+                .append(worker1.getName()).append(" ")
+                .append(parser.parse(worker1.getHired())).append(" ")
+                .append(parser.parse(worker1.getFired())).append(" ")
+                .append(converter.convert(Currency.USD, worker1.getSalary(), Currency.RUB))
+                .append(System.lineSeparator())
+                .append(worker2.getName()).append(" ")
+                .append(parser.parse(worker2.getHired())).append(" ")
+                .append(parser.parse(worker2.getFired())).append(" ")
+                .append(converter.convert(Currency.USD, worker2.getSalary(), Currency.RUB))
                 .append(System.lineSeparator());
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
