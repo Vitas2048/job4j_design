@@ -20,9 +20,9 @@ class ReportJsonTest {
         store.add(worker);
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Report engine = new ReportJson(store);
-        String expected = String.format("[{\"name\":\"%s\",\"hired\":{\"year\":%s,\"month\":%s,\"dayOfMonth\":%s," +
-                        "\"hourOfDay\":%s,\"minute\":%s,\"second\":%s},\"fired\":{\"year\":%s,\"month\":%s," +
-                        "\"dayOfMonth\":%s,\"hourOfDay\":%s,\"minute\":%s,\"second\":%s},\"salary\":%s}]",
+        String expected = String.format("[{\"name\":\"%s\",\"hired\":{\"year\":%s,\"month\":%s,\"dayOfMonth\":%s,"
+                        + "\"hourOfDay\":%s,\"minute\":%s,\"second\":%s},\"fired\":{\"year\":%s,\"month\":%s,"
+                        + "\"dayOfMonth\":%s,\"hourOfDay\":%s,\"minute\":%s,\"second\":%s},\"salary\":%s}]",
                 worker.getName(), worker.getHired().get(Calendar.YEAR), worker.getHired().get(Calendar.MONTH),
                 worker.getHired().get(Calendar.DAY_OF_MONTH), worker.getHired().get(Calendar.HOUR_OF_DAY),
                 worker.getHired().get(Calendar.MINUTE), worker.getHired().get(Calendar.SECOND),
