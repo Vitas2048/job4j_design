@@ -37,12 +37,12 @@ public class ReportXml implements Report {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
             marshaller.setAdapter(new DateAdapter());
-            StringWriter writer = new StringWriter();
+            try(StringWriter writer = new StringWriter()) {
             Employees employees = new Employees(store.findBy(filter));
             marshaller.marshal(employees, writer);
             xml = writer.getBuffer().toString();
-
-        } catch (JAXBException e) {
+            }
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return xml;
