@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class SystemOut implements Out {
 
-    private Date date = new Date();
+    private SportCars s = new Ferrarri();
 
     @Override
     public void print() {
