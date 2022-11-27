@@ -1,5 +1,6 @@
 package ru.job4j.ood.srp.report;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
@@ -15,14 +16,14 @@ public class ReportJson implements Report {
 
     private final Store store;
 
+    private final Gson builder = new GsonBuilder().create();
+
     public ReportJson(Store store) {
         this.store = store;
     }
 
     @Override
     public String generate(Predicate<Employee> filter) {
-        List<Employee> employees = store.findBy(filter);
-        var builder = new GsonBuilder().create();
-        return builder.toJson(employees);
+        return builder.toJson(store.findBy(filter));
     }
 }
