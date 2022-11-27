@@ -5,4 +5,8 @@ import java.util.List;
 
 public class Race {
     List<Ferrarri> cars = new ArrayList<>();
+
+    public Ferrarri race() {
+        return null;
+    }
 }
