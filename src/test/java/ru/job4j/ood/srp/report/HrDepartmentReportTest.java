@@ -26,7 +26,7 @@ class HrDepartmentReportTest {
         store.add(worker);
         store.add(worker1);
         store.add(worker2);
-        Report engine = new HrDepartmentReport(store, parser);
+        Report engine = new HrDepartmentReport(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Salary;")
                 .append(System.lineSeparator())

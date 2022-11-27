@@ -26,9 +26,9 @@ class ProgrammerDepartmentReportTest {
         store.add(worker);
         store.add(worker1);
         store.add(worker2);
-        Report engine = new ProgammerDepartmentReport(store, converter, parser);
+        Report engine = new ProgammerDepartmentReport(store, parser);
         StringBuilder expect = new StringBuilder()
-                .append("Name; Hired; Fired; Salary;")
+                .append("Name;Hired;Fired;Salary")
                 .append(System.lineSeparator())
                 .append(worker.getName()).append(";")
                 .append(parser.parse(worker.getFired())).append(";")

@@ -13,15 +13,13 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class HrDepartmentReport implements Report {
-    private final Store store;
 
     private static final Comparator<Employee> COMPARATOR = Comparator.comparingDouble(Employee::getSalary).reversed();
 
-    private final DateTimeParser<Calendar> dateTimeParser;
+    private final Store store;
 
-    public HrDepartmentReport(Store store, DateTimeParser<Calendar> dateTimeParser) {
+    public HrDepartmentReport(Store store) {
         this.store = store;
-        this.dateTimeParser = dateTimeParser;
     }
 
     @Override

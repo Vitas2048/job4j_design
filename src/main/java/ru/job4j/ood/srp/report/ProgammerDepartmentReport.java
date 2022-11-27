@@ -14,20 +14,18 @@ public class ProgammerDepartmentReport implements Report {
 
     private final Store store;
 
-    private final CurrencyConverter converter;
 
     private final DateTimeParser<Calendar> dateTimeParser;
 
-    public ProgammerDepartmentReport(Store store, CurrencyConverter converter, DateTimeParser<Calendar> dateTimeParser) {
+    public ProgammerDepartmentReport(Store store, DateTimeParser<Calendar> dateTimeParser) {
         this.store = store;
-        this.converter = converter;
         this.dateTimeParser = dateTimeParser;
     }
 
     @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
-        text.append("Name; Hired; Fired; Salary;")
+        text.append("Name;Hired;Fired;Salary")
                 .append(System.lineSeparator());
         for (Employee employee : store.findBy(filter)) {
             text.append(employee.getName()).append(";")
