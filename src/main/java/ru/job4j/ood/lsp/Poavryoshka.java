@@ -1,6 +1,6 @@
 package ru.job4j.ood.lsp;
 
-public class Poavryoshka extends Loszhka{
+public class Poavryoshka extends Loszhka {
 
     public Poavryoshka(int capacity) {
         super(capacity);
