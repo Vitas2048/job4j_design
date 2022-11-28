@@ -16,7 +16,6 @@ public abstract class AbstractStore implements Store {
         if (resultFood != null) {
             foods.add(resultFood);
         }
-
     }
 
     @Override

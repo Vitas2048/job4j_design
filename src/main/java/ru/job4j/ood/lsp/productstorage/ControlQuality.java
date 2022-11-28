@@ -8,13 +8,11 @@ public class ControlQuality {
 
     private List<Food> foods;
 
-    private AbstractStore store;
-
     public ControlQuality(List<Food> foods) {
         this.foods = foods;
     }
 
-    public void execute() {
+    public void execute(AbstractStore store) {
         for (Food food : this.foods) {
             store.store(food);
         }
