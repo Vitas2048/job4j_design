@@ -29,7 +29,7 @@ class JustParkingTest {
     }
 
     @Test
-    public void parkingTruckAndTruckandCarFalse() {
+    public void parkingTruckAndTruckAndCarFalse() {
         Parking parking = new JustParking(2, 1);
         Truck truck = new Truck(2);
         Truck truck2 = new Truck(2);
