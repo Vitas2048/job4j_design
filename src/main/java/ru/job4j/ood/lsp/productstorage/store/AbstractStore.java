@@ -1,6 +1,8 @@
 package ru.job4j.ood.lsp.productstorage.store;
 
 import ru.job4j.ood.lsp.productstorage.Food;
+import ru.job4j.ood.lsp.productstorage.expirationcalculator.ExpirationCalculator;
+import ru.job4j.ood.lsp.productstorage.expirationcalculator.LocalDateExpirationCalculator;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,12 +12,15 @@ public abstract class AbstractStore implements Store {
 
     private List<Food> foods = new ArrayList<>();
 
+    ExpirationCalculator calculator = new LocalDateExpirationCalculator();
+
     @Override
-    public void store(Food food) {
-        Food resultFood = ifCondition(food);
-        if (resultFood != null) {
-            foods.add(resultFood);
+    public boolean add(Food food) {
+        if (ifCondition(food)) {
+            foods.add(food);
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -23,12 +28,9 @@ public abstract class AbstractStore implements Store {
        return this.foods;
     }
 
-    public int getPercent(Food food) {
-        var created = food.getCreateDate().getTime();
-        var expired = food.getExpiryDate().getTime() - created;
-        var now = new Date().getTime() - created;
-        return (int) (now * 100 / expired);
+    public double getPercent(Food food) {
+        return calculator.calculateInPercent(food.getCreateDate().toLocalDate(), food.getExpiryDate().toLocalDate());
     }
 
-    abstract Food ifCondition(Food food);
+    abstract boolean ifCondition(Food food);
 }

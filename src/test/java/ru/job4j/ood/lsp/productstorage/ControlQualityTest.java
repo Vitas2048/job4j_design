@@ -1,13 +1,11 @@
 package ru.job4j.ood.lsp.productstorage;
 
 import org.junit.jupiter.api.Test;
-import ru.job4j.ood.lsp.productstorage.store.AbstractStore;
-import ru.job4j.ood.lsp.productstorage.store.Shop;
-import ru.job4j.ood.lsp.productstorage.store.Trash;
-import ru.job4j.ood.lsp.productstorage.store.Warehouse;
+import ru.job4j.ood.lsp.productstorage.store.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,29 +14,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class ControlQualityTest {
     @Test
     public void moveToTrash() throws ParseException {
-        List<Food> except = new ArrayList<>();
-        Food carrot = new Food("carrot", new SimpleDateFormat("dd/MM/yyyy").parse("20/10/2022"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("11/11/2022"), 120, 15);
-        Food cucamber = new Food("cucamber", new SimpleDateFormat("dd/MM/yyyy").parse("20/10/2022"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("30/12/2022"), 100, 15);
-        Food meat = new Food("meat", new SimpleDateFormat("dd/MM/yyyy").parse("20/11/2022"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("12/12/2023"), 100, 15);
-        except.add(carrot);
-        except.add(cucamber);
-        except.add(meat);
+        Food carrot = new Food("carrot", LocalDateTime.of(2022, 10, 20, 10, 10),
+                LocalDateTime.of(2022, 11, 11, 10, 10), 120, 15);
+        Food cucamber = new Food("cucamber", LocalDateTime.of(2022, 10, 20, 10, 10),
+                LocalDateTime.of(2022, 12, 30, 10, 10), 100, 15);
+        Food meat = new Food("meat", LocalDateTime.of(2022, 11, 20, 10, 10),
+                LocalDateTime.of(2023, 12, 12, 10, 10), 100, 15);
         List<Food> exceptShop = new ArrayList<>();
         exceptShop.add(cucamber);
         List<Food> exceptWarehouse = new ArrayList<>();
         exceptWarehouse.add(meat);
         List<Food> exceptTrash = new ArrayList<>();
         exceptTrash.add(carrot);
-        ControlQuality controlQuality = new ControlQuality(except);
         Trash trash = new Trash();
         Shop shop = new Shop();
         Warehouse warehouse = new Warehouse();
-        controlQuality.execute(trash);
-        controlQuality.execute(shop);
-        controlQuality.execute(warehouse);
+        List<Store> stores = new ArrayList<>();
+        stores.add(trash);
+        stores.add(shop);
+        stores.add(warehouse);
+        ControlQuality controlQuality = new ControlQuality(stores);
+        controlQuality.execute(carrot);
+        controlQuality.execute(cucamber);
+        controlQuality.execute(meat);
         assertEquals(exceptTrash, trash.get());
         assertEquals(exceptShop, shop.get());
         assertEquals(exceptWarehouse, warehouse.get());

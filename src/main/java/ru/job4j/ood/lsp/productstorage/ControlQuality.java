@@ -1,20 +1,21 @@
 package ru.job4j.ood.lsp.productstorage;
 
 import ru.job4j.ood.lsp.productstorage.store.AbstractStore;
+import ru.job4j.ood.lsp.productstorage.store.Store;
 
 import java.util.List;
 
 public class ControlQuality {
 
-    private List<Food> foods;
+    private List<Store> stores;
 
-    public ControlQuality(List<Food> foods) {
-        this.foods = foods;
+    public ControlQuality(List<Store> stores) {
+        this.stores = stores;
     }
 
-    public void execute(AbstractStore store) {
-        for (Food food : this.foods) {
-            store.store(food);
+    public void execute(Food food) {
+        for (Store store : this.stores) {
+            store.add(food);
         }
     }
 }

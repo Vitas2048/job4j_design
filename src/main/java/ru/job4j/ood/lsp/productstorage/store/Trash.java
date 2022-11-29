@@ -4,11 +4,10 @@ import ru.job4j.ood.lsp.productstorage.Food;
 
 public class Trash extends AbstractStore {
 
+    private final int EXPIRED = 100;
+
     @Override
-    Food ifCondition(Food food) {
-        if (getPercent(food) >= 100) {
-            return food;
-        }
-        return null;
+    boolean ifCondition(Food food) {
+        return getPercent(food) >= EXPIRED;
     }
 }

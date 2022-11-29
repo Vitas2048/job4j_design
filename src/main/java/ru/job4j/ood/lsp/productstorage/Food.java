@@ -6,15 +6,15 @@ import java.util.Date;
 public class Food {
     private String name;
 
-    private Date expiryDate;
+    private LocalDateTime expiryDate;
 
-    private Date createDate;
+    private LocalDateTime createDate;
 
     private int price;
 
     private int discount;
 
-    public Food(String name, Date createDate, Date expiryDate, int price, int discount) {
+    public Food(String name, LocalDateTime createDate, LocalDateTime expiryDate, int price, int discount) {
         this.name = name;
         this.expiryDate = expiryDate;
         this.createDate = createDate;
@@ -30,19 +30,19 @@ public class Food {
         this.name = name;
     }
 
-    public Date getExpiryDate() {
+    public LocalDateTime getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(LocalDateTime expiryDate) {
         this.expiryDate = expiryDate;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
