@@ -15,7 +15,9 @@ public class ControlQuality {
 
     public void execute(Food food) {
         for (Store store : this.stores) {
-            store.add(food);
+            if (store.add(food)) {
+                break;
+            }
         }
     }
 }

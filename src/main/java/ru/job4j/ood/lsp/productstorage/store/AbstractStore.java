@@ -12,7 +12,6 @@ public abstract class AbstractStore implements Store {
 
     private List<Food> foods = new ArrayList<>();
 
-    ExpirationCalculator calculator = new LocalDateExpirationCalculator();
 
     @Override
     public boolean add(Food food) {
@@ -25,11 +24,7 @@ public abstract class AbstractStore implements Store {
 
     @Override
     public List<Food> get() {
-       return this.foods;
-    }
-
-    public double getPercent(Food food) {
-        return calculator.calculateInPercent(food.getCreateDate().toLocalDate(), food.getExpiryDate().toLocalDate());
+       return new ArrayList<>(foods);
     }
 
     abstract boolean ifCondition(Food food);
