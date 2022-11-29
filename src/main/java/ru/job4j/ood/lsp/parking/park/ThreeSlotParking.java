@@ -8,4 +8,9 @@ public class ThreeSlotParking implements Parking {
     public boolean store(Vehicle vehicle) {
         return false;
     }
+
+    @Override
+    public boolean remove(Vehicle vehicle) {
+        return false;
+    }
 }
