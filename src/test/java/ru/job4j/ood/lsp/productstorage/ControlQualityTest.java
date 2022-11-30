@@ -6,6 +6,7 @@ import ru.job4j.ood.lsp.productstorage.store.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ControlQualityTest {
     @Test
-    public void moveToTrash() throws ParseException {
-        Food carrot = new Food("carrot", LocalDateTime.now().minusDays(100),
-                LocalDateTime.now().minusDays(40), 120, 15);
-        Food cucamber = new Food("cucamber", LocalDateTime.now().minusDays(20),
-                LocalDateTime.now().plusDays(30), 100, 15);
-        Food meat = new Food("meat", LocalDateTime.now().minusDays(9),
-                LocalDateTime.now().plusDays(380), 100, 15);
+    public void whenCheckAllSores() throws ParseException {
+        Food carrot = new Food("carrot", LocalDate.now().minusDays(100),
+                LocalDate.now().minusDays(40), 120, 15);
+        Food cucamber = new Food("cucamber", LocalDate.now().minusDays(20),
+                LocalDate.now().plusDays(30), 100, 15);
+        Food meat = new Food("meat", LocalDate.now().minusDays(9),
+                LocalDate.now().plusDays(380), 100, 15);
         List<Food> exceptShop = new ArrayList<>();
         exceptShop.add(cucamber);
         List<Food> exceptWarehouse = new ArrayList<>();

@@ -12,11 +12,8 @@ public class Warehouse extends AbstractStore {
     }
 
     @Override
-    boolean ifCondition(Food food) {
-        return getPercent(food) <= Shop.FRESH;
-    }
-
-    public double getPercent(Food food) {
-        return calculator.calculateInPercent(food.getCreateDate().toLocalDate(), food.getExpiryDate().toLocalDate());
+    public boolean ifCondition(Food food) {
+        var calculateInPercent = calculator.calculateInPercent(food.getCreateDate(), food.getExpiryDate());
+        return calculateInPercent <= Shop.FRESH;
     }
 }

@@ -18,20 +18,17 @@ public class Shop extends AbstractStore {
     }
 
     @Override
-    boolean ifCondition(Food food) {
-        var percent = getPercent(food);
+    public boolean ifCondition(Food food) {
+        var calculateInPercent = calculator.calculateInPercent(food.getCreateDate(), food.getExpiryDate());
         int price = food.getPrice();
-        if (percent < ALMOST_EXPIRED && percent > FRESH) {
+        if (calculateInPercent < ALMOST_EXPIRED && calculateInPercent > FRESH) {
             return true;
         }
-        if (percent >= ALMOST_EXPIRED && percent < EXPIRED) {
+        if (calculateInPercent >= ALMOST_EXPIRED && calculateInPercent < EXPIRED) {
             food.setPrice(price - price * food.getDiscount() / 100);
             return true;
         }
         return false;
     }
 
-    public double getPercent(Food food) {
-        return calculator.calculateInPercent(food.getCreateDate().toLocalDate(), food.getExpiryDate().toLocalDate());
-    }
 }
