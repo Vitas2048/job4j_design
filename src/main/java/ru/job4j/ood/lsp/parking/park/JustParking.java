@@ -1,6 +1,7 @@
 package ru.job4j.ood.lsp.parking.park;
 
 import ru.job4j.ood.lsp.parking.PassengerCar;
+import ru.job4j.ood.lsp.parking.Truck;
 import ru.job4j.ood.lsp.parking.Vehicle;
 
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class JustParking implements Parking {
     public JustParking(int carCapacity, int truckCapacity) {
         this.carCapacity = carCapacity;
         this.truckCapacity = truckCapacity;
-        this.cars = new ArrayList<>();
-        this.trucks = new ArrayList<>();
+        this.cars = new ArrayList<>(carCapacity);
+        this.trucks = new ArrayList<>(truckCapacity);
     }
 
     @Override
@@ -30,16 +31,17 @@ public class JustParking implements Parking {
             truckCapacity--;
             trucks.add(vehicle);
             return true;
-        } else if (vehiicleSize > PassengerCar.CAR_SIZE && carCapacity >= vehiicleSize) {
+        }
+        if (vehiicleSize > PassengerCar.CAR_SIZE && carCapacity >= vehiicleSize) {
             carCapacity -= vehiicleSize;
             trucks.add(vehicle);
             return true;
-        } else if (carCapacity - vehiicleSize >= 0) {
+        }
+        if (carCapacity - vehiicleSize >= 0) {
             carCapacity--;
             cars.add(vehicle);
             return true;
         }
         return false;
     }
-
 }

@@ -6,6 +6,9 @@ public class Truck implements Vehicle {
 
     public Truck(int size) {
         this.size = size;
+        if (size <= PassengerCar.CAR_SIZE) {
+            throw new IllegalArgumentException("Truck must take more than 1 slot");
+        }
     }
 
     @Override
