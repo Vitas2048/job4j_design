@@ -1,4 +1,4 @@
 package ru.job4j.ood.lsp;
 
-public class Eraser implements EraseInstriment{
+public class Eraser implements EraseInstriment {
 }
