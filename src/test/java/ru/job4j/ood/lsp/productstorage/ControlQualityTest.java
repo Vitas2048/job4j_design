@@ -35,10 +35,12 @@ class ControlQualityTest {
         stores.add(trash);
         stores.add(shop);
         stores.add(warehouse);
-        ControlQuality controlQuality = new ControlQuality(stores);
-        controlQuality.execute(carrot);
-        controlQuality.execute(cucamber);
-        controlQuality.execute(meat);
+        FoodStore foodStore = new FoodStore();
+        ControlQuality controlQuality = new ControlQuality(stores, foodStore);
+        foodStore.add(carrot);
+        foodStore.add(cucamber);
+        foodStore.add(meat);
+        controlQuality.execute();
         assertEquals(exceptTrash, trash.get());
         assertEquals(exceptShop, shop.get());
         assertEquals(exceptWarehouse, warehouse.get());
