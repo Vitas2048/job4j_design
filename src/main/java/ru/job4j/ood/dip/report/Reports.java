@@ -14,7 +14,7 @@ public class Reports {
         reports1.add(log);
         reports1.add(bug);
         reports1.add(log);
-        for(Report report : reports1.get()) {
+        for (Report report : reports1.get()) {
             report.report();
         }
     }
