@@ -15,11 +15,14 @@ public class ControlQuality {
     }
 
     public void execute(List<Food> foods) {
+        List<Food> foods1 = new ArrayList<>(foods);
         for (Store store : this.stores) {
-            for (Food food : foods)
+            for (Food food : foods1) {
                 if (store.add(food)) {
+                    foods1.remove(food);
                     break;
                 }
+            }
             }
         }
 
