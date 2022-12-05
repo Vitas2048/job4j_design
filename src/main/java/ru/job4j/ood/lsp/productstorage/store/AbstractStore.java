@@ -27,5 +27,9 @@ public abstract class AbstractStore implements Store {
        return new ArrayList<>(foods);
     }
 
+    public void clear() {
+        this.foods.clear();
+    }
+
     abstract boolean ifCondition(Food food);
 }

@@ -8,36 +8,27 @@ import java.util.List;
 
 public class ControlQuality {
 
-    private List<Store> stores;
+    private List<AbstractStore> stores;
 
-    private FoodStore foodStore;
-
-    public ControlQuality(List<Store> stores, FoodStore foodStore) {
+    public ControlQuality(List<AbstractStore> stores) {
         this.stores = stores;
-        this.foodStore = foodStore;
     }
 
-    public void execute() {
-        List<Food> foods = new ArrayList<>(this.foodStore.getFoods());
+    public void execute(List<Food> foods) {
         for (Store store : this.stores) {
-            for (Food food : foods) {
+            for (Food food : foods)
                 if (store.add(food)) {
-                    foods.remove(food);
                     break;
                 }
             }
         }
-    }
 
     public void resort() {
-        List<Food> foods = this.foodStore.getFoods();
-        for (Store store : this.stores) {
-            for (Food food : foods) {
-                if (store.add(food)) {
-                    foods.remove(food);
-                    break;
-                }
-            }
+        List<Food> foods = new ArrayList<>();
+        for (AbstractStore store : this.stores) {
+            foods.addAll(store.get());
+            store.clear();
         }
+        execute(foods);
     }
 }
