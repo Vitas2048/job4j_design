@@ -8,9 +8,9 @@ import java.util.List;
 
 public class ControlQuality {
 
-    private List<AbstractStore> stores;
+    private List<Store> stores;
 
-    public ControlQuality(List<AbstractStore> stores) {
+    public ControlQuality(List<Store> stores) {
         this.stores = stores;
     }
 
@@ -28,7 +28,7 @@ public class ControlQuality {
 
     public void resort() {
         List<Food> foods = new ArrayList<>();
-        for (AbstractStore store : this.stores) {
+        for (Store store : this.stores) {
             foods.addAll(store.get());
             store.clear();
         }

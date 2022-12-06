@@ -31,7 +31,7 @@ class ControlQualityTest {
         Trash trash = new Trash(new LocalDateExpirationCalculator());
         Shop shop = new Shop(new LocalDateExpirationCalculator());
         Warehouse warehouse = new Warehouse(new LocalDateExpirationCalculator());
-        List<AbstractStore> stores = new ArrayList<>();
+        List<Store> stores = new ArrayList<>();
         stores.add(trash);
         stores.add(shop);
         stores.add(warehouse);
