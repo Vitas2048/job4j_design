@@ -50,14 +50,14 @@ public class SimpleMenuTest {
         menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
         menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
         String expected = """
-                ----1.Сходить в магазин
-                --------1.1.Купить продукты
-                ------------1.1.1.Купить хлеб
-                ------------1.1.2.Купить молоко
-                ----2.Покормить собаку
-                ----3.Убраться дома
-                --------3.1.Пропылесосить
-                --------3.2.Помыть полы""".indent(0);
+                1.Сходить в магазин
+                ----1.1.Купить продукты
+                --------1.1.1.Купить хлеб
+                --------1.1.2.Купить молоко
+                2.Покормить собаку
+                3.Убраться дома
+                ----3.1.Пропылесосить
+                ----3.2.Помыть полы""".indent(0);
         print.print(menu);
         Assertions.assertEquals(expected, output.toString());
         System.setOut(null);
@@ -71,18 +71,20 @@ public class SimpleMenuTest {
         menu.add("Spider man", "Man", STUB_ACTION);
         menu.add(Menu.ROOT, "Iron man", STUB_ACTION);
         menu.add("Iron man", "Iron", STUB_ACTION);
-        menu.add("Iron man", "Man", STUB_ACTION);
+        menu.add("Iron man", "Man2", STUB_ACTION);
         menu.add(Menu.ROOT, "Batman", STUB_ACTION);
         menu.add("Batman", "Bat", STUB_ACTION);
-        menu.add("Batman", "Man", STUB_ACTION);
+        menu.add("Batman", "Man1", STUB_ACTION);
+        TreePrint print = new TreePrint();
+        print.print(menu);
         assertThat(new Menu.MenuItemInfo("Spider man",
                 List.of("Spider", "Man"), STUB_ACTION, "1."))
                 .isEqualTo(menu.select("Spider man").get());
         assertThat(new Menu.MenuItemInfo("Batman",
-                List.of("Bat", "Man"), STUB_ACTION, "3."))
+                List.of("Bat", "Man1"), STUB_ACTION, "3."))
                 .isEqualTo(menu.select("Batman").get());
         assertThat(new Menu.MenuItemInfo("Iron man",
-                List.of("Iron", "Man"), STUB_ACTION, "2."))
+                List.of("Iron", "Man2"), STUB_ACTION, "2."))
                 .isEqualTo(menu.select("Iron man").get());
     }
 }

@@ -1,21 +1,17 @@
 package ru.job4j.ood.isp.menu;
 
-import java.util.regex.Pattern;
+
+import static java.lang.System.lineSeparator;
 
 public class TreePrint implements MenuPrinter {
 
+    private static final String DELIMITER = "----";
+
     @Override
     public void print(Menu menu) {
-        var iterator = menu.iterator();
-        while (iterator.hasNext()) {
-            var next = iterator.next();
-            var s = new StringBuilder();
-            var p = Pattern.compile("\\.");
-            var m = p.matcher(next.getNumber());
-            while (m.find()) {
-                s.append("----");
-            }
-            System.out.printf(s + next.getNumber() + next.getName() + "\n");
+        for (Menu.MenuItemInfo item : menu) {
+            int count = item.getNumber().split("\\.").length - 1;
+            System.out.print(DELIMITER.repeat(count) + item.getNumber() + item.getName() + lineSeparator());
         }
     }
 }

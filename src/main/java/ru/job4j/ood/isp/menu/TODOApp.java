@@ -6,16 +6,19 @@ public class TODOApp {
 
     public static final ActionDelegate STUB_ACTION = System.out::println;
 
-    public static final int ADD = 1;
+    public static final int ADD_ROOT = 1;
 
-    public static final int SHOW = 2;
+    public static final int ADD_CHILD = 2;
 
-    public static final int FINISH = 3;
+    public static final int SHOW = 3;
+
+    public static final int FINISH = 4;
 
     public static final String MENU = """
             Введите 1, для для добавления в пункт меню.
-            Введите 2, Вывести меню на экран
-            Введите 3, Выйти из программы
+            Введите 2, для добавления подпункта в пункт меню
+            Введите 3, Вывести меню на экран
+            Введите 4, Выйти из программы
             """;
 
     public static final String SELECT = "Введите число";
@@ -34,19 +37,16 @@ public class TODOApp {
             System.out.println(MENU);
             System.out.println(SELECT);
             int userChoice = Integer.parseInt(scanner.nextLine());
-            if (ADD == userChoice) {
+            if (ADD_ROOT == userChoice) {
+                System.out.println(SELECTPARENT);
+                var addParent = scanner.nextLine();
+                menu.add(Menu.ROOT, addParent, STUB_ACTION);
+            } else if (ADD_CHILD == userChoice) {
                 System.out.println(SELECTPARENT);
                 var addParent = scanner.nextLine();
                 System.out.println(SELECTCHILD);
                 var addChild = scanner.nextLine();
-                if (addParent.isEmpty() && addChild.isEmpty()
-                || addParent.isEmpty() && !addChild.isEmpty()) {
-                    System.out.println(WRONG);
-                } else if (!addParent.isEmpty() && addChild.isEmpty()) {
-                    menu.add(Menu.ROOT, addParent, STUB_ACTION);
-                } else {
-                    menu.add(addParent, addChild, STUB_ACTION);
-                }
+                menu.add(addParent, addChild, STUB_ACTION);
             } else if (SHOW == userChoice) {
                 print.print(menu);
             } else if (FINISH == userChoice) {
