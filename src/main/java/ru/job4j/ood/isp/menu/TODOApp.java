@@ -31,7 +31,7 @@ public class TODOApp {
 
     public static final String EXIT = "Конец работы";
 
-    private static void start(Menu menu, Scanner scanner, TreePrint print) {
+    private static void start(Menu menu, Scanner scanner, ConsoleMenuPrinter print) {
         boolean run = true;
         while (run) {
             System.out.println(MENU);
@@ -57,7 +57,7 @@ public class TODOApp {
     }
 
     public static void main(String[] args) {
-        TreePrint print = new TreePrint();
+        ConsoleMenuPrinter print = new ConsoleMenuPrinter();
         Menu menu = new SimpleMenu();
         Scanner scanner = new Scanner(System.in);
         start(menu, scanner, print);

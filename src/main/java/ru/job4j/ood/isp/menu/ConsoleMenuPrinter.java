@@ -3,7 +3,7 @@ package ru.job4j.ood.isp.menu;
 
 import static java.lang.System.lineSeparator;
 
-public class TreePrint implements MenuPrinter {
+public class ConsoleMenuPrinter implements MenuPrinter {
 
     private static final String DELIMITER = "----";
 
