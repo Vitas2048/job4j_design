@@ -31,7 +31,7 @@ public class TODOApp {
 
     public static final String EXIT = "Конец работы";
 
-    private static void start(Menu menu, Scanner scanner, ConsoleMenuPrinter print) {
+    private static void start(Menu menu, Scanner scanner, MenuPrinter print) {
         boolean run = true;
         while (run) {
             System.out.println(MENU);
