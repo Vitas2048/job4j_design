@@ -31,21 +31,21 @@ public class TODOApp {
 
     public static final String EXIT = "Конец работы";
 
-    private static void start(Menu menu, Scanner scanner, MenuPrinter print) {
+    private static void start(Menu menu, Scanner scanner1, MenuPrinter print) {
         boolean run = true;
         while (run) {
             System.out.println(MENU);
             System.out.println(SELECT);
-            int userChoice = Integer.parseInt(scanner.nextLine());
+            int userChoice = Integer.parseInt(scanner1.nextLine());
             if (ADD_ROOT == userChoice) {
                 System.out.println(SELECTPARENT);
-                var addParent = scanner.nextLine();
+                var addParent = scanner1.nextLine();
                 menu.add(Menu.ROOT, addParent, STUB_ACTION);
             } else if (ADD_CHILD == userChoice) {
                 System.out.println(SELECTPARENT);
-                var addParent = scanner.nextLine();
+                var addParent = scanner1.nextLine();
                 System.out.println(SELECTCHILD);
-                var addChild = scanner.nextLine();
+                var addChild = scanner1.nextLine();
                 menu.add(addParent, addChild, STUB_ACTION);
             } else if (SHOW == userChoice) {
                 print.print(menu);
