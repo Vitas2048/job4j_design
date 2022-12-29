@@ -12,20 +12,20 @@ public final class ParseFile {
     }
 
     public synchronized String getContentIf(Predicate<Character> filter) throws IOException {
-        InputStream i = new FileInputStream(file);
         String output = "";
-        int data;
-        while ((data = i.read()) > 0) {
-            if (filter.test((char) data)) {
-                output += (char) data;
+        try (InputStream i = new FileInputStream(file)) {
+            int data;
+            while ((data = i.read()) != -1) {
+                if (filter.test((char) data)) {
+                    output = String.format("%s%s", output, (char) data);
+                }
             }
         }
-        i.close();
         return output;
     }
 
     public synchronized String getContent() throws IOException {
-        return getContentIf(Objects::nonNull);
+        return getContentIf(data -> true);
     }
 
     public synchronized String getContentWithoutUnicode() throws IOException {
